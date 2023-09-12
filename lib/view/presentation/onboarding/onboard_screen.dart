@@ -43,59 +43,61 @@ class _OnboardScreenState extends ConsumerState<OnboardScreen>
           animation: animation,
           builder: (context, child) {
             return SafeArea(
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.transparent,
-                    height: 400.h,
-                    width: 375.h,
-                    child: Stack(
-                      children: [
-                        Transform.rotate(
-                          angle: animation.value,
-                          child: Container(
-                              color: Colors.transparent,
-                              height: 400.h,
-                              width: 375.h,
-                              child: const OnboardingPictureCard()),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Image.asset(
-                            "assets/images/onboarding/center.png",
-                            scale: 2.6,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      color: Colors.transparent,
+                      height: 400.h,
+                      width: 375.h,
+                      child: Stack(
+                        children: [
+                          Transform.rotate(
+                            angle: animation.value,
+                            child: Container(
+                                color: Colors.transparent,
+                                height: 400.h,
+                                width: 375.h,
+                                child: const OnboardingPictureCard()),
                           ),
-                        ),
-                      ],
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              "assets/images/onboarding/center.png",
+                              scale: 2.6,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  HelpSpace.h(48),
-                  Text(
-                    "Start Cooking",
-                    style: RecipeText.big(),
-                  ),
-                  HelpSpace.h(16),
-                  SizedBox(
-                    width: 200,
-                    child: Text(
-                      "Let's join our community to cook better food!",
-                      style: RecipeText.medium(),
-                      textAlign: TextAlign.center,
+                    HelpSpace.h(48),
+                    Text(
+                      "Start Cooking",
+                      style: RecipeText.big(),
                     ),
-                  ),
-                  HelpSpace.h(72),
-                  Align(
-                    alignment: Alignment.center,
-                    child: AppButton(
-                        isLoading: false,
-                        title: "Get Started",
-                        function: () {
-                          Navigator.push(context,
-                              SlideUpRoute(page: const SignInScreen()));
-                        },
-                        isLarge: true),
-                  )
-                ],
+                    HelpSpace.h(16),
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        "Let's join our community to cook better food!",
+                        style: RecipeText.medium(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    HelpSpace.h(72),
+                    Align(
+                      alignment: Alignment.center,
+                      child: AppButton(
+                          isLoading: false,
+                          title: "Get Started",
+                          function: () {
+                            Navigator.push(context,
+                                SlideUpRoute(page: const SignInScreen()));
+                          },
+                          isLarge: true),
+                    )
+                  ],
+                ),
               ),
             );
           }),

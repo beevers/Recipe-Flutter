@@ -37,12 +37,26 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                   style: RecipeText.small(),
                 ),
                 HelpSpace.h(32),
-                const OtpField(),
-                HelpSpace.h(48),
-                Text(
-                  "code expires in: 03:12",
-                  style: RecipeText.small(),
-                  textAlign: TextAlign.center,
+                OtpField(
+                  onCompleted: (v) {
+                    debugPrint("Completed");
+                  },
+                ),
+                HelpSpace.h(30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "code expires in: ",
+                      style: RecipeText.small(),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "03:12",
+                      style: RecipeText.small(color: red),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
                 HelpSpace.h(23),
                 AppButton(
@@ -53,14 +67,12 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                     },
                     isLarge: true),
                 HelpSpace.h(16),
-                AppButton(
-                    color: white,
+                OutlinedAppButton(
                     isLoading: false,
-                    title: "Send Again",
                     function: () {
                       Get.to(() => const ResetPasswordScreen());
                     },
-                    isLarge: true),
+                    isLarge: true)
               ],
             ),
           ),

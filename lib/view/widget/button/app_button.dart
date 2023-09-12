@@ -4,6 +4,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 
+class OutlinedAppButton extends ConsumerWidget {
+  final String? imageTitle;
+  final bool isLoading;
+  final bool isLarge;
+  final String? title;
+  final Function()? function;
+  const OutlinedAppButton(
+      {required this.isLoading,
+      this.title,
+      this.imageTitle,
+      required this.function,
+      required this.isLarge,
+      super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return OutlinedButton(
+        style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(
+                isLarge ? Size(327.w, 56.h) : Size(205.w, 59.h)),
+            side: MaterialStateProperty.all(
+                BorderSide(color: grey, width: 1.0, style: BorderStyle.solid))),
+        onPressed: function,
+        child: Text(
+          "Resend Code",
+          style: RecipeText.small(),
+        ));
+  }
+}
+
 class AppButton extends ConsumerWidget {
   final String? imageTitle;
   final bool isLoading;
