@@ -11,9 +11,14 @@ class DashboardScreen extends ConsumerStatefulWidget {
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Find your Recipe")),
-      body: const Center(child: Text("Home Screen Loading...")),
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Find your Recipe")),
+        body: const Center(child: Text("Home Screen Loading...")),
+      ),
     );
   }
 }

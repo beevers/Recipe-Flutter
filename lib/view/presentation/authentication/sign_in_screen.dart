@@ -2,9 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
+import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_up_screen.dart';
 import 'package:recipe_app/view/presentation/home/dashboard_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
@@ -65,9 +68,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "Forgot Password?",
-                        style: RecipeText.small(color: const Color(0xff2e3d5c)),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const PasswordRecoveryScreen());
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style:
+                              RecipeText.small(color: const Color(0xff2e3d5c)),
+                        ),
                       ),
                     ],
                   ),

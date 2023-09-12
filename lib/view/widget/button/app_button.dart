@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 
 class AppButton extends ConsumerWidget {
@@ -38,7 +39,8 @@ class AppButton extends ConsumerWidget {
             : imageTitle == null
                 ? Text(
                     title.toString(),
-                    style: RecipeText.small(color: Colors.white),
+                    style: RecipeText.small(
+                        color: title == "Send Again" ? grey : Colors.white),
                   )
                 : Image.asset(
                     imageTitle.toString(),

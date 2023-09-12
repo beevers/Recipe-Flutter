@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/utils/page_transistion_utils.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
@@ -90,7 +90,8 @@ class _OnboardScreenState extends ConsumerState<OnboardScreen>
                         isLoading: false,
                         title: "Get Started",
                         function: () {
-                          Get.to(() => const SignInScreen());
+                          Navigator.push(context,
+                              SlideUpRoute(page: const SignInScreen()));
                         },
                         isLarge: true),
                   )
