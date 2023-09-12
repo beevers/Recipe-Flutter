@@ -4,14 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 
 class AppButton extends ConsumerWidget {
+  final String? imageTitle;
   final bool isLoading;
   final bool isLarge;
-  final String title;
+  final String? title;
   final Function()? function;
   final Color color;
   const AppButton(
       {required this.isLoading,
-      required this.title,
+      this.title,
+      this.imageTitle,
       required this.function,
       required this.isLarge,
       this.color = const Color(0xff1FCC79),
@@ -33,9 +35,14 @@ class AppButton extends ConsumerWidget {
                   color: Colors.white,
                 ),
               )
-            : Text(
-                title,
-                style: RecipeText.small(color: Colors.white),
-              ));
+            : imageTitle == null
+                ? Text(
+                    title.toString(),
+                    style: RecipeText.small(color: Colors.white),
+                  )
+                : Image.asset(
+                    imageTitle.toString(),
+                    scale: 2,
+                  ));
   }
 }

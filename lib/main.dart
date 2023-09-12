@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:get/get_navigation/src/root/get_material_app.dart";
 import "package:recipe_app/view/presentation/size_manager/size_manager.dart";
 
 void main() {
@@ -18,8 +19,10 @@ class RecipeApp extends ConsumerWidget {
       splitScreenMode: true,
       designSize: Size(width, height),
       builder: (context, child) {
-        return MaterialApp(
-            theme: ThemeData(useMaterial3: true), home: const SizeManager());
+        return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(useMaterial3: true),
+            home: const SizeManager());
       },
     );
   }
