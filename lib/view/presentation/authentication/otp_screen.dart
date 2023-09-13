@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
-import 'package:recipe_app/view/presentation/authentication/reset_password_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
@@ -62,17 +59,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                 AppButton(
                     isLoading: false,
                     title: "Next",
-                    function: () {
-                      Get.to(() => const ResetPasswordScreen());
-                    },
+                    function: () {},
                     isLarge: true),
                 HelpSpace.h(16),
                 OutlinedAppButton(
-                    isLoading: false,
-                    function: () {
-                      Get.to(() => const ResetPasswordScreen());
-                    },
-                    isLarge: true)
+                    isLoading: false, function: () {}, isLarge: true)
               ],
             ),
           ),
