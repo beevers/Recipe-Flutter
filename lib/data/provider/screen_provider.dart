@@ -13,3 +13,6 @@ Provider<List<Widget>> _screens = Provider((ref) => [
     ]);
 
 Provider<List<Widget>> get screenProvider => _screens;
+
+//Not to stay here
+List option = ["All", "Food", "Drinks", "Dessert", "Snacks", "Others"];

@@ -15,7 +15,8 @@ class DashboardScreen extends ConsumerStatefulWidget {
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
-    controller = PageController(initialPage: currentPageIndex, keepPage: true);
+    controller = PageController(
+        initialPage: ref.read(screenIndexProvider), keepPage: true);
     super.initState();
   }
 
@@ -29,29 +30,30 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               itemCount: screenVm.length,
               controller: controller,
               onPageChanged: (index) {
-                setState(() {
-                  currentPageIndex = index;
-                });
+                if (index >= 2) {
+                  ref.read(screenIndexProvider.notifier).state = index + 1;
+                } else {
+                  ref.read(screenIndexProvider.notifier).state = index;
+                }
               },
               itemBuilder: (context, index) {
                 return screenVm[index];
               })),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: currentPageIndex,
+          currentIndex: ref.watch(screenIndexProvider),
           onTap: (index) {
-            setState(() {
-              if (index != 2) {
-                currentPageIndex = index;
-                controller.animateToPage(
-                  currentPageIndex == 3 || currentPageIndex == 4
-                      ? currentPageIndex - 1
-                      : currentPageIndex,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                );
-              }
-            });
+            ref.read(screenIndexProvider.notifier).state = index;
+            if (index != 2) {
+              ref.read(screenIndexProvider.notifier).state = index;
+              controller.animateToPage(
+                ref.watch(screenIndexProvider) >= 3
+                    ? ref.read(screenIndexProvider.notifier).state - 1
+                    : ref.watch(screenIndexProvider),
+                duration: const Duration(milliseconds: 50),
+                curve: Curves.easeInOut,
+              );
+            }
           },
           unselectedItemColor: grey,
           selectedItemColor: green,
@@ -68,8 +70,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               icon: SizedBox(
                 height: 20,
                 width: 20,
-              ), // This is an empty item for spacing
-              label: '',
+              ),
+              label: 'Scan',
             ),
             BottomNavigationBarItem(
               icon: Icon(IconlyBold.notification),

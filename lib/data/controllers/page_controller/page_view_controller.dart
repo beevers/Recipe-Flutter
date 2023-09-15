@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-int currentPageIndex = 0;
+StateProvider<int> screenIndexProvider = StateProvider<int>((ref) => 0);
 late PageController controller;
