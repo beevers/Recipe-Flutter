@@ -9,7 +9,7 @@ import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
 import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_up_screen.dart';
-import 'package:recipe_app/view/presentation/home/dashboard_screen.dart';
+import 'package:recipe_app/view/dashboard_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';

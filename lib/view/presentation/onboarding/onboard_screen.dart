@@ -85,16 +85,20 @@ class _OnboardScreenState extends ConsumerState<OnboardScreen>
                       ),
                     ),
                     HelpSpace.h(72),
-                    Align(
-                      alignment: Alignment.center,
-                      child: AppButton(
-                          isLoading: false,
-                          title: "Get Started",
-                          function: () {
-                            Navigator.push(context,
-                                SlideUpRoute(page: const SignInScreen()));
-                          },
-                          isLarge: true),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 140.h,
+                      child: Align(
+                        alignment: Alignment(0, -controller.value),
+                        child: AppButton(
+                            isLoading: false,
+                            title: "Get Started",
+                            function: () {
+                              Navigator.push(context,
+                                  SlideUpRoute(page: const SignInScreen()));
+                            },
+                            isLarge: true),
+                      ),
                     )
                   ],
                 ),

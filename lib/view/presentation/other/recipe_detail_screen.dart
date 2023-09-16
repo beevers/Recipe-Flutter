@@ -32,7 +32,7 @@ class _RecipeDetailScreenState extends ConsumerState<RecipeDetailScreen> {
                 children: [
                   Container(
                     color: red,
-                    width: 375.w,
+                    width: double.infinity,
                     height: 375.h,
                   ),
                   Align(

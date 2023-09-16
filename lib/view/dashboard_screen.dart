@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/page_controller/page_view_controller.dart';
 import 'package:recipe_app/data/provider/screen_provider.dart';
+import 'package:recipe_app/view/presentation/status/no_network_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
@@ -86,7 +89,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         backgroundColor: green,
         shape:
             ShapeBorder.lerp(const CircleBorder(), const StadiumBorder(), 1.0),
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => const NoNetworkScreen());
+        },
         child: Icon(
           IconlyBold.scan,
           color: white,

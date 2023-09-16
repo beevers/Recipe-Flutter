@@ -8,16 +8,16 @@ class SizeManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
-      return constraint.maxHeight < 800 && constraint.maxWidth < 450
+      // print(constraint.maxHeight);
+      // print(constraint.maxWidth);
+      // print(constraint.minHeight);
+      // print(constraint.minWidth);
+      return constraint.maxHeight < 900 && constraint.maxWidth < 450
           ? const OnboardScreen()
           : Text(
               "Web View in progress",
               style: RecipeText.big(),
             );
-      // print(constraint.maxHeight);
-      // print(constraint.maxWidth);
-      // print(constraint.minHeight);
-      // print(constraint.minWidth);
     });
   }
 }

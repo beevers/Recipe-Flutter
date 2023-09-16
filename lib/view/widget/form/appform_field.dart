@@ -28,7 +28,7 @@ class SearchFormField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
-      width: 231.w,
+      width: 241.w,
       height: 56.h,
       child: TextFormField(
         autofocus: true,
@@ -95,35 +95,38 @@ class AppFormField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      width: 327.w,
-      height: 56.h,
-      child: TextFormField(
-        readOnly: readOnly ?? false,
-        onTap: onTap,
-        obscureText: isObscure,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: validator,
-        controller: controller,
-        cursorColor: green,
-        decoration: InputDecoration(
-            suffixIcon: Icon(suffixIcon),
-            hintStyle: RecipeText.small(),
-            hintText: title,
-            prefixIcon: isIcon
-                ? Icon(prefixIcon)
-                : IconImageWidget(
-                    iconImage: iconImage,
-                  ),
-            filled: true,
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40.r),
-                borderSide: BorderSide(
-                    width: 1.5, color: readOnly == null ? grey : green)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: grey),
-                borderRadius: BorderRadius.circular(40.r))),
+    return Padding(
+      padding: EdgeInsets.only(left: 20.w, right: 20.w),
+      child: SizedBox(
+        width: double.infinity,
+        height: 56.h,
+        child: TextFormField(
+          readOnly: readOnly ?? false,
+          onTap: onTap,
+          obscureText: isObscure,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          controller: controller,
+          cursorColor: green,
+          decoration: InputDecoration(
+              suffixIcon: Icon(suffixIcon),
+              hintStyle: RecipeText.small(),
+              hintText: title,
+              prefixIcon: isIcon
+                  ? Icon(prefixIcon)
+                  : IconImageWidget(
+                      iconImage: iconImage,
+                    ),
+              filled: true,
+              fillColor: Colors.white,
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(40.r),
+                  borderSide: BorderSide(
+                      width: 1.5, color: readOnly == null ? green : grey)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: grey),
+                  borderRadius: BorderRadius.circular(40.r))),
+        ),
       ),
     );
   }

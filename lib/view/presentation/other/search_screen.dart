@@ -25,11 +25,13 @@ class SearchScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(
-                  icon: const Icon(IconlyLight.arrow_left_2),
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     Get.back();
                   },
+                  child: const Icon(
+                    IconlyLight.arrow_left_2,
+                  ),
                 ),
                 HelpSpace.w(5),
                 SearchFormField(
@@ -52,7 +54,10 @@ class SearchScreen extends ConsumerWidget {
                                 sheetContent: SearchSheetContent());
                           });
                     },
-                    icon: const Icon(IconlyBold.filter))
+                    icon: const Icon(
+                      IconlyBold.filter,
+                      size: 20,
+                    ))
               ],
             ),
             HelpSpace.h(24),
@@ -60,7 +65,7 @@ class SearchScreen extends ConsumerWidget {
               thickness: 8,
               color: lightGrey,
             ),
-            HelpSpace.h(24),
+            HelpSpace.h(10),
             SizedBox(
               width: double.infinity,
               height: 90,
@@ -89,7 +94,7 @@ class SearchScreen extends ConsumerWidget {
                     );
                   }),
             ),
-            HelpSpace.h(24),
+            HelpSpace.h(10),
             Divider(
               thickness: 8,
               color: lightGrey,
@@ -157,17 +162,38 @@ class _SearchSheetContentState extends ConsumerState<SearchSheetContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "<10",
-                  style: RecipeText.small(color: height >= 10 ? green : grey),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      height = 10;
+                    });
+                  },
+                  child: Text(
+                    "<10",
+                    style: RecipeText.small(color: height >= 10 ? green : grey),
+                  ),
                 ),
-                Text(
-                  "35",
-                  style: RecipeText.small(color: height >= 35 ? green : grey),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      height = 35;
+                    });
+                  },
+                  child: Text(
+                    "35",
+                    style: RecipeText.small(color: height >= 35 ? green : grey),
+                  ),
                 ),
-                Text(
-                  ">60",
-                  style: RecipeText.small(color: height >= 60 ? green : grey),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      height = 60;
+                    });
+                  },
+                  child: Text(
+                    ">60",
+                    style: RecipeText.small(color: height >= 60 ? green : grey),
+                  ),
                 ),
               ],
             ),
@@ -183,7 +209,7 @@ class _SearchSheetContentState extends ConsumerState<SearchSheetContent> {
             ),
             HelpSpace.h(50),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(
                   2,
                   (index) => AppButton(
