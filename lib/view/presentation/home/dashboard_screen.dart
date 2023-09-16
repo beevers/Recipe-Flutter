@@ -56,7 +56,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             }
           },
           unselectedItemColor: grey,
-          selectedItemColor: green,
+          selectedItemColor: ref.watch(screenIndexProvider) == 2 ? grey : green,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(IconlyBold.home),

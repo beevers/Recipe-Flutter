@@ -3,6 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:get/get_navigation/src/root/get_material_app.dart";
 import "package:recipe_app/view/presentation/size_manager/size_manager.dart";
+import "package:recipe_app/view/theme/app_color.dart";
 
 void main() {
   runApp(const ProviderScope(child: RecipeApp()));
@@ -21,7 +22,17 @@ class RecipeApp extends ConsumerWidget {
       builder: (context, child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(useMaterial3: true),
+            theme: ThemeData(
+                useMaterial3: true,
+                sliderTheme: SliderThemeData(
+                    trackHeight: 4,
+                    activeTrackColor: green,
+                    thumbColor: green,
+                    overlayColor: const Color(0x015eb155),
+                    thumbShape:
+                        const RoundSliderThumbShape(enabledThumbRadius: 10),
+                    overlayShape:
+                        const RoundSliderOverlayShape(overlayRadius: 10))),
             home: const SizeManager());
       },
     );

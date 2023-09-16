@@ -54,7 +54,7 @@ class AppButton extends ConsumerWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: color,
-            minimumSize: isLarge ? Size(327.w, 56.h) : Size(205.w, 59.h),
+            minimumSize: isLarge ? Size(327.w, 56.h) : Size(150.w, 56.h),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(90.r))),
         onPressed: function,

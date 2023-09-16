@@ -86,8 +86,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     isLoading: false,
                     title: "Login",
                     function: () {
-                      Navigator.push(context,
-                          RotationRoute(page: const DashboardScreen()));
+                      Get.to(() => const DashboardScreen());
                     },
                     isLarge: true),
                 HelpSpace.h(24),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/view/presentation/home/recipe_detail_screen.dart';
+import 'package:recipe_app/view/presentation/home/search_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/card/filter_card.dart';
@@ -32,6 +36,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           child: Column(
             children: [
               AppFormField(
+                readOnly: true,
+                onTap: () {
+                  Get.to(() => const SearchScreen());
+                },
                 isObscure: false,
                 validator: (v) {
                   return null;
@@ -103,7 +111,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           const EdgeInsets.all(8.0), // padding around the grid
                       itemCount: 2, // total number of items
                       itemBuilder: (context, index) {
-                        return const RecipeCardTemplate();
+                        return RecipeCardTemplate(
+                          onTap: () {
+                            Get.to(() => const RecipeDetailScreen());
+                          },
+                        );
                       },
                     ),
 
@@ -121,7 +133,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           const EdgeInsets.all(8.0), // padding around the grid
                       itemCount: 8, // total number of items
                       itemBuilder: (context, index) {
-                        return const RecipeCardTemplate();
+                        return const RecipeCardTemplate(
+                          onTap: null,
+                        );
                       },
                     ),
                   ],

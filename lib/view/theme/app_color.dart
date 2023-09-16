@@ -8,3 +8,4 @@ Color lightGrey = const Color(0x339FA5C0);
 Color white = const Color(0xffFFFFFF);
 Color transparent = Colors.transparent;
 Color blur = const Color(0x33FFFFFF);
+Color dBlue = const Color(0xff3d5481);

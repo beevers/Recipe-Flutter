@@ -10,6 +10,6 @@ class UploadScreen extends ConsumerStatefulWidget {
 class _UploadScreenState extends ConsumerState<UploadScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Upload Screen"));
+    return const Center(child: Text("Profile Screen"));
   }
 }
