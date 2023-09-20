@@ -1,11 +1,14 @@
 import "package:flutter/material.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:get/get_navigation/src/root/get_material_app.dart";
 import "package:recipe_app/view/presentation/size_manager/size_manager.dart";
 import "package:recipe_app/view/theme/app_color.dart";
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await dotenv.load(fileName: ".env");
   runApp(const ProviderScope(child: RecipeApp()));
 }
 
