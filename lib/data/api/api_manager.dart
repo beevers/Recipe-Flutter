@@ -34,14 +34,6 @@ abstract class ApiManager {
     dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
     dio.options.headers['Authorization'] =
         'Bearer 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';
-
-    // dio.options.headers = {
-    //   'Content-Type': 'application/json',
-    //   'Authorization':
-    //       'Bearer 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'
-    // };
-
-    // dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
   }
 
   //GET
