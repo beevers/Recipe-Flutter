@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final scanProvider = ChangeNotifierProvider((ref) => ScanProvider());
 
 class ScanProvider extends ChangeNotifier {
-  dynamic scanBarCodeRes;
+  String? scanBarCodeRes;
   Future<void> scanBarcode(bool mounted) async {
     String barcodeScanRes;
     try {
+      print("seeee thissss${scanBarCodeRes.runtimeType}");
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         "#1FCC79", // Color for the scan button
         "Cancel", // Text for the cancel button
@@ -24,6 +25,7 @@ class ScanProvider extends ChangeNotifier {
     if (!mounted) return;
 
     scanBarCodeRes = barcodeScanRes;
+
     notifyListeners();
   }
 }

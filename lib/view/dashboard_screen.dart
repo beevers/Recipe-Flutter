@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/page_controller/page_view_controller.dart';
+import 'package:recipe_app/data/provider/scan_provider.dart';
 import 'package:recipe_app/data/provider/screen_provider.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
+import 'package:recipe_app/view/widget/card/modal_sheet_content.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -86,11 +88,22 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         backgroundColor: green,
         shape:
             ShapeBorder.lerp(const CircleBorder(), const StadiumBorder(), 1.0),
-        onPressed: () {
-          // final result = ref.read(scanProvider).scanBarcode(mounted);
-          // TODO figure out what to do with the result here
-          // print(result);
-          // Get.to(() => const ScanScreen());
+        onPressed: () async {
+          await ref.read(scanProvider).scanBarcode(mounted);
+
+          ref.watch(scanProvider).scanBarCodeRes == "-1"
+              ? Container()
+              // ignore: use_build_context_synchronously
+              : showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return ModalBottomSheeet(
+                        sheetContent: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                          ref.watch(scanProvider).scanBarCodeRes.toString()),
+                    ));
+                  });
         },
         child: Icon(
           IconlyBold.scan,

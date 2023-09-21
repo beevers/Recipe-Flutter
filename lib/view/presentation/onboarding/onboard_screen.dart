@@ -77,7 +77,7 @@ class _OnboardScreenState extends ConsumerState<OnboardScreen>
                     ),
                     HelpSpace.h(16),
                     SizedBox(
-                      width: 200,
+                      width: 220,
                       child: Text(
                         "Let's join our community to cook better food!",
                         style: RecipeText.medium(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
-import 'package:recipe_app/view/theme/app_color.dart';
+import 'package:recipe_app/data/utils/timer.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/otp_form_field.dart';
@@ -48,11 +48,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       style: RecipeText.small(),
                       textAlign: TextAlign.center,
                     ),
-                    Text(
-                      "03:12",
-                      style: RecipeText.small(color: red),
-                      textAlign: TextAlign.center,
-                    ),
+                    const TimeCounter()
                   ],
                 ),
                 HelpSpace.h(23),
