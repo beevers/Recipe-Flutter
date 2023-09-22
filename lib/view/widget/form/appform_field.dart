@@ -70,6 +70,7 @@ class SearchFormField extends ConsumerWidget {
 
 class AppFormField extends ConsumerWidget {
   final bool? readOnly;
+  final Function()? suffixAction;
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final Function()? onTap;
@@ -80,6 +81,7 @@ class AppFormField extends ConsumerWidget {
   final String title;
   final IconData? prefixIcon;
   const AppFormField({
+    this.suffixAction,
     this.readOnly,
     this.onTap,
     required this.isObscure,
@@ -109,7 +111,13 @@ class AppFormField extends ConsumerWidget {
           controller: controller,
           cursorColor: green,
           decoration: InputDecoration(
-              suffixIcon: Icon(suffixIcon),
+              //In this case a notify is displaying the error message.
+              errorStyle: const TextStyle(fontSize: 0),
+              suffixIcon: IconButton(
+                onPressed: suffixAction,
+                icon: Icon(suffixIcon),
+                color: Colors.black,
+              ),
               hintStyle: RecipeText.small(),
               hintText: title,
               prefixIcon: isIcon
@@ -119,6 +127,12 @@ class AppFormField extends ConsumerWidget {
                     ),
               filled: true,
               fillColor: Colors.white,
+              errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(40.r),
+                  borderSide: BorderSide(width: 1.5, color: red)),
+              focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(40.r),
+                  borderSide: BorderSide(width: 1.5, color: red)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(40.r),
                   borderSide: BorderSide(
