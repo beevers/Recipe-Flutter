@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recipe_app/view/widget/button/app_button.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -10,6 +12,20 @@ class ProfileScreen extends ConsumerStatefulWidget {
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Profile Screen"));
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AppButton(
+          isLoading: false,
+          function: () {
+            FirebaseAuth.instance.signOut();
+          },
+          isLarge: false,
+          title: "Sign Out",
+        ),
+        const Text("Profile Screen"),
+      ],
+    ));
   }
 }

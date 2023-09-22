@@ -8,7 +8,6 @@ import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
-import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
 import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_up_screen.dart';
@@ -90,7 +89,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     title: "Login",
                     function: () async {
                       final response = await ref.read(authVm).signIn();
-                      print(response);
+                      // print(response);
                       if (response) {
                         Get.to(() => const DashboardScreen());
                       }
