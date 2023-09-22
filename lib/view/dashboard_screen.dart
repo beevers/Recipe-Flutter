@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconly/iconly.dart';
@@ -24,6 +25,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    print(user);
+    print(user!.email);
     final screenVm = ref.watch(screenProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -113,6 +117,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+//TODO to sign out FirebaseAuth.instance.signOut();
 
   @override
   void dispose() {

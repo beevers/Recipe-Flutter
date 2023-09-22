@@ -51,6 +51,7 @@ dependencies:
   fluttertoast: ^8.2.2
   timer_count_down: ^2.2.2
   firebase_core: ^2.16.0
+  firebase_auth: ^4.10.0
 
 dev_dependencies:
   flutter_test:

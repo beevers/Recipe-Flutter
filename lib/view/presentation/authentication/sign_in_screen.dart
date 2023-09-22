@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
+import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
+import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
 import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_up_screen.dart';
@@ -49,8 +52,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     validator: (value) {
                       return null;
                     },
-                    controller: TextEditingController(),
-                    title: "Email or phone number"),
+                    controller: emailController,
+                    title: "Email address"),
                 HelpSpace.h(16),
                 AppFormField(
                     isIcon: true,
@@ -60,7 +63,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     validator: (value) {
                       return null;
                     },
-                    controller: TextEditingController(),
+                    controller: passwordController,
                     title: "Password"),
                 HelpSpace.h(24),
                 Padding(
@@ -85,8 +88,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 AppButton(
                     isLoading: false,
                     title: "Login",
-                    function: () {
-                      Get.to(() => const DashboardScreen());
+                    function: () async {
+                      final response = await ref.read(authVm).signIn();
+                      print(response);
+                      if (response) {
+                        Get.to(() => const DashboardScreen());
+                      }
                     },
                     isLarge: true),
                 HelpSpace.h(24),

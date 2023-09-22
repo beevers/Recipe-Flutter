@@ -1,3 +1,12 @@
 import 'package:flutter/material.dart';
 
-TextEditingController searchController = TextEditingController();
+final searchController = TextEditingController();
+
+//Sign In Controllers
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
+
+//Sign Up Controllers
+final susernameController = TextEditingController();
+final semailController = TextEditingController();
+final spasswordController = TextEditingController();

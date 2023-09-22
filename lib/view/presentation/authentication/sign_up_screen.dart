@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
+import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
@@ -42,7 +43,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   validator: (value) {
                     return null;
                   },
-                  controller: TextEditingController(),
+                  controller: susernameController,
                   title: "Username"),
               HelpSpace.h(16),
               AppFormField(
@@ -52,8 +53,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   validator: (value) {
                     return null;
                   },
-                  controller: TextEditingController(),
-                  title: "Email or phone number"),
+                  controller: semailController,
+                  title: "Email Address"),
               HelpSpace.h(16),
               AppFormField(
                   isIcon: true,
@@ -63,7 +64,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   validator: (value) {
                     return null;
                   },
-                  controller: TextEditingController(),
+                  controller: spasswordController,
                   title: "Password"),
               HelpSpace.h(24),
               Padding(
