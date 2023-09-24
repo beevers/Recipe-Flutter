@@ -32,6 +32,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   });
   @override
   Widget build(BuildContext context) {
+    final authVm = ref.watch(authVmProvider);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -98,11 +99,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   HelpSpace.h(72),
                   AppButton(
-                      isLoading: false,
+                      isLoading: authVm.signInData.loading,
                       title: "Login",
                       function: () async {
+                        FocusScope.of(context).unfocus();
                         if (_formKey.currentState!.validate()) {
-                          final response = await ref.read(authVm).signIn();
+                          final response =
+                              await ref.read(authVmProvider).signIn();
                           // print(response);
                           if (response) {
                             Get.to(() => const DashboardScreen());

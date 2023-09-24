@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recipe_app/data/api/api_manager.dart';
+import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/model/food/get_food_model.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -16,6 +19,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        AppButton(
+          isLoading: false,
+          function: () {},
+          isLarge: false,
+          title: "Test APi",
+        ),
+        HelpSpace.h(20),
         AppButton(
           isLoading: false,
           function: () {

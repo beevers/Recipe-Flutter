@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/card/profile_pic_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card.dart';
 
 class RecipeCardTemplate extends ConsumerWidget {
+  final int index;
   final Function()? onTap;
-  const RecipeCardTemplate({super.key, required this.onTap});
+  const RecipeCardTemplate(
+      {super.key, required this.onTap, required this.index});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final foodVm = ref.watch(getFoodViewModel).getFoodData.data;
     return InkWell(
       onTap: onTap,
       child: SizedBox(
@@ -32,13 +36,19 @@ class RecipeCardTemplate extends ConsumerWidget {
               ],
             ),
             HelpSpace.h(16),
-            const RecipeCard(),
+            RecipeCard(
+              index: index,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Pancake",
-                  style: RecipeText.medium(color: const Color(0xff3d5481)),
+                SizedBox(
+                  width: 150,
+                  child: Text(
+                    "${foodVm!.searchResults![index].results![index].name}",
+                    maxLines: 1,
+                    style: RecipeText.medium(color: const Color(0xff3d5481)),
+                  ),
                 ),
               ],
             ),

@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/presentation/other/recipe_detail_screen.dart';
 import 'package:recipe_app/view/presentation/other/search_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
@@ -30,6 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final foodVm = ref.watch(getFoodViewModel).getFoodData.data;
     return Padding(
         padding: const EdgeInsets.only(top: 16),
         child: Center(
@@ -65,12 +67,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               HelpSpace.h(16),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                      5,
-                      (index) => FilterCard(
-                            index: index,
-                          )),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10.w),
+                  child: Row(
+                    children: List.generate(
+                        5,
+                        (index) => FilterCard(
+                              index: index,
+                            )),
+                  ),
                 ),
               ),
               HelpSpace.h(24),
@@ -109,13 +114,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                       padding:
                           const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: 2, // total number of items
+                      itemCount: foodVm!.limit, // total number of items
                       itemBuilder: (context, index) {
-                        return RecipeCardTemplate(
-                          onTap: () {
-                            Get.to(() => const RecipeDetailScreen());
-                          },
-                        );
+                        // print(foodVm.limit);
+                        // print(
+                        //     foodVm.searchResults![index].results![index].name);
+                        // print(
+                        //     foodVm.searchResults![index].results![index].image);
+                        return foodVm.searchResults![index].results!.isEmpty
+                            ? Container()
+                            : RecipeCardTemplate(
+                                index: index,
+                                onTap: () {
+                                  Get.to(() => const RecipeDetailScreen());
+                                },
+                              );
                       },
                     ),
 
@@ -131,9 +144,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                       padding:
                           const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: 8, // total number of items
+                      itemCount: foodVm.limit, // total number of items
                       itemBuilder: (context, index) {
-                        return const RecipeCardTemplate(
+                        return RecipeCardTemplate(
+                          index: index,
                           onTap: null,
                         );
                       },
