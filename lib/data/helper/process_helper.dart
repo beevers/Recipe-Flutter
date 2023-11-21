@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+abstract class AppServicesInterface {}
+
 class AppServices {
   static String processDate(String dateTime) {
     DateTime formatted = DateTime.parse(dateTime);
@@ -15,7 +17,8 @@ class AppServices {
     if (fnum.contains(",") || snum.contains(",")) {
       String fnumWithoutComma = fnum.replaceAll(',', '');
       String snumWithoutComma = snum.replaceAll(',', '');
-      double result = double.parse(fnumWithoutComma) + double.parse(snumWithoutComma);
+      double result =
+          double.parse(fnumWithoutComma) + double.parse(snumWithoutComma);
       return result;
     } else {
       double result = double.parse(fnum) + double.parse(snum);
@@ -38,7 +41,8 @@ class AppServices {
     DateTime formatted = DateTime.parse(dateTime);
 
     // Define the desired date format
-    String formattedDate = DateFormat('MMM dd, yyyy, hh:mm a').format(formatted);
+    String formattedDate =
+        DateFormat('MMM dd, yyyy, hh:mm a').format(formatted);
 
     return formattedDate;
   }
@@ -48,7 +52,9 @@ class AppServices {
     // Get the current date
     DateTime today = DateTime.now();
     // Compare the year, month, and day of the given date with today's date
-    return date.year == today.year && date.month == today.month && date.day == today.day;
+    return date.year == today.year &&
+        date.month == today.month &&
+        date.day == today.day;
   }
 
   static bool isYesterday(String dateTime) {
@@ -60,7 +66,9 @@ class AppServices {
     DateTime yesterday = now.subtract(const Duration(days: 1));
 
     // Compare the date portion of the input date with yesterday's date
-    return date.year == yesterday.year && date.month == yesterday.month && date.day == yesterday.day;
+    return date.year == yesterday.year &&
+        date.month == yesterday.month &&
+        date.day == yesterday.day;
   }
 
   static bool isSameDay(String? dateTime1, String? dateTime2) {
@@ -69,7 +77,9 @@ class AppServices {
     }
     DateTime date1 = DateTime.parse(dateTime1);
     DateTime date2 = DateTime.parse(dateTime2);
-    return date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 
   static getDay(String date) {
@@ -158,7 +168,8 @@ class AppServices {
     int minutes = durationInSeconds ~/ 60;
     int seconds = durationInSeconds % 60;
 
-    String formattedDuration = '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+    String formattedDuration =
+        '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
     return formattedDuration;
   }
 }

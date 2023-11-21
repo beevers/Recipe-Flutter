@@ -1,14 +1,22 @@
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
+import "package:flutter_downloader/flutter_downloader.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:get/get_navigation/get_navigation.dart";
 import "package:get/get_navigation/src/root/get_material_app.dart";
 import "package:recipe_app/firebase_options.dart";
-import "package:recipe_app/view/presentation/size_manager/size_manager.dart";
+import 'package:recipe_app/data/controllers/screen_controller.dart';
 import "package:recipe_app/view/theme/app_color.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(
+      debug:
+          true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl:
+          true // option: set to false to disable working with http links (default: false)
+      );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

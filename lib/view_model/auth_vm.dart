@@ -27,6 +27,7 @@ class AuthViewModel extends BaseViewModel {
     signInData.load();
     notifyListeners();
     final result = await ref.read(authServiceProvider).signIn();
+    print("result $result");
     if (result == "done") {
       signInData.onSuccess("Success");
       notifyListeners();
