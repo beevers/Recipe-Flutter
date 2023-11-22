@@ -5,6 +5,8 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/api/custom_exception.dart';
 import 'package:recipe_app/data/dependency_Injection/injection_container.dart';
+import 'package:recipe_app/data/provider/global_provider/global_var.dart';
+import 'package:recipe_app/data/utils/inject_server_err_chck_utils.dart';
 import 'package:recipe_app/model/formatted_response.dart';
 import 'package:recipe_app/data/utils/network.dart' as networkutils;
 
@@ -168,7 +170,8 @@ abstract class ApiManager {
       if (e.type == DioExceptionType.connectionTimeout ||
           e.type == DioExceptionType.receiveTimeout ||
           e.type == DioExceptionType.sendTimeout) {
-        //TODO make this return a value when the connection timed out
+        serverStatus = locator<InjectServerErrorCheck>()
+            .serverErrorCheck(ServerErrorType.connectionTimeout);
         return FormattedResponse(
           responseCodeError: "Connection Timeout",
           success: false,
@@ -199,11 +202,9 @@ abstract class ApiManager {
         );
       } else if (e.response!.statusCode == 500 ||
           e.response!.statusCode == 403) {
-        //Dependency Injection used here
-        //TODO tests it if it is working
-        final result =
-            locator<InjectRiverPod>().serverErrorOccur(confirm: true);
-        print("Api manager - $result");
+        serverStatus = locator<InjectServerErrorCheck>()
+            .serverErrorCheck(ServerErrorType.serverFailure);
+
         return FormattedResponse(
           data: e.response?.data,
           responseCodeError:
@@ -231,7 +232,8 @@ abstract class ApiManager {
         throw const CustomException('Something went wrong');
       }
     }
-    locator<InjectRiverPod>().serverErrorOccur(confirm: false);
+    serverStatus = locator<InjectServerErrorCheck>()
+        .serverErrorCheck(ServerErrorType.serverSuccess);
     return FormattedResponse(
       data: response?.data,
       success: "${response?.statusCode}".startsWith('2'),

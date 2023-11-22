@@ -1,13 +1,8 @@
 import 'package:get_it/get_it.dart';
-
-class InjectRiverPod {
-  bool serverErrorOccur({bool confirm = false}) {
-    return confirm;
-  }
-}
+import 'package:recipe_app/data/utils/inject_server_err_chck_utils.dart';
 
 final locator = GetIt.instance;
 
 void injectDependency() {
-  locator.registerSingleton<InjectRiverPod>(InjectRiverPod());
+  locator.registerSingleton<InjectServerErrorCheck>(InjectServerErrorCheck());
 }
