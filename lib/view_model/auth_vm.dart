@@ -12,7 +12,7 @@ class AuthViewModel extends BaseViewModel {
     signUpData.load();
     notifyListeners();
     final result = await ref.read(authServiceProvider).signUp();
-    if (result == "done") {
+    if (result == "success") {
       signUpData.onSuccess("Success");
       notifyListeners();
       return true;
@@ -27,13 +27,12 @@ class AuthViewModel extends BaseViewModel {
     signInData.load();
     notifyListeners();
     final result = await ref.read(authServiceProvider).signIn();
-    print("result $result");
-    if (result == "done") {
+    if (result == "success") {
       signInData.onSuccess("Success");
       notifyListeners();
       return true;
     } else {
-      signInData.onError(result == "true" ? null : result);
+      signInData.onError(result);
       notifyListeners();
       return false;
     }

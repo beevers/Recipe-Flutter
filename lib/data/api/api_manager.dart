@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/api/custom_exception.dart';
+import 'package:recipe_app/data/dependency_Injection/injection_container.dart';
 import 'package:recipe_app/model/formatted_response.dart';
 import 'package:recipe_app/data/utils/network.dart' as networkutils;
 
@@ -198,6 +199,11 @@ abstract class ApiManager {
         );
       } else if (e.response!.statusCode == 500 ||
           e.response!.statusCode == 403) {
+        //Dependency Injection used here
+        //TODO tests it if it is working
+        final result =
+            locator<InjectRiverPod>().serverErrorOccur(confirm: true);
+        print("Api manager - $result");
         return FormattedResponse(
           data: e.response?.data,
           responseCodeError:
@@ -225,6 +231,7 @@ abstract class ApiManager {
         throw const CustomException('Something went wrong');
       }
     }
+    locator<InjectRiverPod>().serverErrorOccur(confirm: false);
     return FormattedResponse(
       data: response?.data,
       success: "${response?.statusCode}".startsWith('2'),
