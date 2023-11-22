@@ -1,117 +1,3 @@
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-
-// class ApiManager {
-//   late Dio dio;
-
-//   ApiManager() {
-//     // Create a Dio instance with base options
-//     dio = Dio(BaseOptions(
-//       baseUrl: "https://api.spoonacular.com",
-//       headers: {
-//         'Content-Type': 'application/json', // Other headers if needed
-//       },
-//     ));
-
-//     // Add an interceptor to append the API key to all requests
-//     dio.interceptors.add(InterceptorsWrapper(
-//       onRequest: (options, handler) {
-//         // Append the API key as a query parameter to every request
-//         options.queryParameters['apiKey'] = 'b03417593d6a4bc184f111ce523397ca';
-//         return handler.next(options);
-//       },
-//     ));
-//   }
-
-// // GET Request
-//   Future<void> fetchData({required String url,}) async {
-//     try {
-//       Response response =
-//           await dio.get("/food/search", queryParameters: {"number": 2});
-//       if (response.statusCode == 200) {
-//         print(response.data); // Handle the response data here
-//       } else {
-//         print('Request failed with status: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       if (e is DioError) {
-//         if (e.response != null) {
-//           // Handle the error response from the server
-//           final response = e.response!;
-//           debugPrint('Status code: ${response.statusCode}');
-//           debugPrint('Response data: ${response.data}');
-//           debugPrint('Error message: ${e.message}');
-//         } else {
-//           // Handle network-related errors
-//           print('Network error: ${e.message}');
-//         }
-//       } else {
-//         // Handle other types of exceptions
-//         print('Error: $e');
-//       }
-//     }
-//   }
-
-// // PATCH Request
-//   Future<void> updateData(int id, Map<String, dynamic> data) async {
-//     try {
-//       Response response =
-//           await dio.patch('https://api.example.com/data/$id', data: data);
-//       if (response.statusCode == 200) {
-//         print(response.data); // Handle the response data here
-//       } else {
-//         print('Request failed with status: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     }
-//   }
-
-// // PUT Request (Update)
-//   Future<void> putData(int id, Map<String, dynamic> data) async {
-//     try {
-//       Response response =
-//           await dio.put('https://api.example.com/data/$id', data: data);
-//       if (response.statusCode == 200) {
-//         print(response.data); // Handle the response data here
-//       } else {
-//         print('Request failed with status: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     }
-//   }
-
-// // DELETE Request
-//   Future<void> deleteData(int id) async {
-//     try {
-//       Response response = await dio.delete('https://api.example.com/data/$id');
-//       if (response.statusCode == 204) {
-//         print('Resource deleted successfully');
-//       } else {
-//         print('Request failed with status: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     }
-//   }
-
-// // POST Request
-//   Future<void> postData(Map<String, dynamic> data) async {
-//     try {
-//       Response response =
-//           await dio.post('https://api.example.com/data', data: data);
-//       if (response.statusCode == 201) {
-//         print(response.data); // Handle the response data here
-//       } else {
-//         print('Request failed with status: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     }
-//   }
-// }
-
 import 'dart:developer' as logger;
 
 import 'package:dio/dio.dart';
@@ -148,20 +34,14 @@ abstract class ApiManager {
     );
 
     dio = Dio(options)
-      ..interceptors.add(DioCacheInterceptor(options: cacheOptions))
-      ..interceptors.add(InterceptorsWrapper(
-        onRequest: (options, handler) {
-          // Append the API key as a query parameter to every request
-          options.queryParameters['apiKey'] =
-              'b03417593d6a4bc184f111ce523397ca';
-          return handler.next(options);
-        },
-      ));
-
-    // dio = Dio(BaseOptions(
-    //   baseUrl: "https://api.spoonacular.com",
-    //   headers: {
-    //     'Content-Type': 'application/json', // Other headers if needed
+      ..interceptors.add(DioCacheInterceptor(options: cacheOptions));
+    //TODO after autthentication check this out
+    // ..interceptors.add(InterceptorsWrapper(
+    //   onRequest: (options, handler) {
+    //     // Append the API key as a query parameter to every request
+    //     options.queryParameters['apiKey'] =
+    //         'b03417593d6a4bc184f111ce523397ca';
+    //     return handler.next(options);
     //   },
     // ));
   }
@@ -287,6 +167,7 @@ abstract class ApiManager {
       if (e.type == DioExceptionType.connectionTimeout ||
           e.type == DioExceptionType.receiveTimeout ||
           e.type == DioExceptionType.sendTimeout) {
+        //TODO make this return a value when the connection timed out
         return FormattedResponse(
           responseCodeError: "Connection Timeout",
           success: false,

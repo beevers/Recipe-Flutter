@@ -48,7 +48,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       style: RecipeText.small(),
                       textAlign: TextAlign.center,
                     ),
-                    const TimeCounter()
+                    const CustomTimer()
                   ],
                 ),
                 HelpSpace.h(23),
