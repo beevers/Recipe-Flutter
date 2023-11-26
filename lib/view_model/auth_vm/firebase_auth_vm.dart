@@ -1,17 +1,18 @@
 import 'package:recipe_app/data/controllers/future_manager.dart';
-import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
+import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
 import 'package:recipe_app/view_model/base_vm.dart';
 
-class AuthViewModel extends BaseViewModel {
-  AuthViewModel(super.ref);
+class FirebaseAuthViewModel extends BaseViewModel {
+  FirebaseAuthViewModel(super.ref);
 
   FutureManager signInData = FutureManager();
   FutureManager signUpData = FutureManager();
+  FutureManager verifyEmailData = FutureManager();
 
   Future<bool> signUp() async {
     signUpData.load();
     notifyListeners();
-    final result = await ref.read(authServiceProvider).signUp();
+    final result = await ref.read(firebaseAuthServiceProvider).signUp();
     if (result == "success") {
       signUpData.onSuccess("Success");
       notifyListeners();
@@ -26,7 +27,7 @@ class AuthViewModel extends BaseViewModel {
   Future<bool> signIn() async {
     signInData.load();
     notifyListeners();
-    final result = await ref.read(authServiceProvider).signIn();
+    final result = await ref.read(firebaseAuthServiceProvider).signIn();
     if (result == "success") {
       signInData.onSuccess("Success");
       notifyListeners();
@@ -39,7 +40,16 @@ class AuthViewModel extends BaseViewModel {
   }
 
   Future<bool> verifyEmail() async {
-    final result = await ref.read(authServiceProvider).verifyEmail();
-    return result;
+    verifyEmailData.load();
+    final result = await ref.read(firebaseAuthServiceProvider).verifyEmail();
+    if (result) {
+      verifyEmailData.onSuccess("Success");
+      notifyListeners();
+      return true;
+    } else {
+      verifyEmailData.onError("Error");
+      notifyListeners();
+      return false;
+    }
   }
 }

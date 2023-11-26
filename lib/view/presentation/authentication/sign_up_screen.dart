@@ -7,7 +7,7 @@ import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
-import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
+import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/view/presentation/authentication/verify_email_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
@@ -135,24 +135,24 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
                 HelpSpace.h(23),
                 AppButton(
-                    isLoading: ref.watch(authVmProvider).signUpData.loading,
+                    isLoading:
+                        ref.watch(firebaseAuthVmProvider).signUpData.loading,
                     title: "Sign Up",
                     function: () async {
+                      Get.to(() => const VerifyEmailScreen());
                       FocusScope.of(context).unfocus();
-                      if (_formKeyS.currentState!.validate()) {
-                        StorageHelper.setString(
-                            'username', susernameController.text);
-                        final response =
-                            await ref.read(authVmProvider).signUp();
-                        if (response) {
-                          NotifyUser.showAlert("Sign Up successful");
-
-                          Get.to(() => const VerifyEmailScreen());
-                        }
-                      } else {
-                        NotifyUser.showAlert(
-                            "Please fill all the required fields");
-                      }
+                      // if (_formKeyS.currentState!.validate()) {
+                      //   StorageHelper.setString(
+                      //       'username', susernameController.text);
+                      //   final response =
+                      //       await ref.read(authVmProvider).signUp();
+                      //   if (response) {
+                      //     NotifyUser.showAlert("Sign Up successful");
+                      //   }
+                      // } else {
+                      //   NotifyUser.showAlert(
+                      //       "Please fill all the required fields");
+                      // }
                     },
                     isLarge: true),
               ],

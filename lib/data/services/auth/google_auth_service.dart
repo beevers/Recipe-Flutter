@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 // ViewModel class responsible for handling Google Authentication
-class GoogleAuthService {
+class GoogleFirebaseAuthService {
   final _loadingProvider = StateProvider<bool>((ref) => false);
 
   StateProvider<bool> get loadingProvider => _loadingProvider;

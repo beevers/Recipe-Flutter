@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 
-class AuthService {
+class FirebaseAuthService {
   Future<String> signIn() async {
     try {
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -11,7 +11,7 @@ class AuthService {
       print(response.user!.emailVerified);
       return "success";
     } on FirebaseAuthException catch (e) {
-      debugPrint("AuthService Class Error- ${e.toString()}");
+      debugPrint("FirebaseAuthService Class Error- ${e.toString()}");
       return e.message.toString();
     }
   }
@@ -23,7 +23,7 @@ class AuthService {
           password: spasswordController.text.trim());
       return "success";
     } on FirebaseAuthException catch (e) {
-      debugPrint("AuthService ${e.toString()}");
+      debugPrint("FirebaseAuthService ${e.toString()}");
       return e.message.toString();
     }
   }
@@ -33,7 +33,7 @@ class AuthService {
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
       return true;
     } on FirebaseAuthException catch (e) {
-      debugPrint("AuthService ${e.toString()}");
+      debugPrint("FirebaseAuthService ${e.toString()}");
       return false;
     }
   }

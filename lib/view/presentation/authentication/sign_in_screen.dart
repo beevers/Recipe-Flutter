@@ -8,7 +8,7 @@ import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
-import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
+import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
 import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
@@ -33,7 +33,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   });
   @override
   Widget build(BuildContext context) {
-    final authVm = ref.watch(authVmProvider);
+    final authVm = ref.watch(firebaseAuthVmProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -104,7 +104,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       FocusScope.of(context).unfocus();
                       if (_formKey.currentState!.validate()) {
                         final response =
-                            await ref.read(authVmProvider).signIn();
+                            await ref.read(firebaseAuthVmProvider).signIn();
                         if (response) {
                           // Get.to(() => const DashboardScreen());
                         }
@@ -125,7 +125,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     color: red,
                     isLoading: false,
                     function: () {
-                      ref.read(googleAuthViewModel).signInWithGoogle();
+                      ref.read(googleFirebaseAuthViewModel).signInWithGoogle();
                       Get.to(() => const DashboardScreen());
                     },
                     isLarge: true),

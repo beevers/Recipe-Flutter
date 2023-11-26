@@ -3,8 +3,8 @@ import 'package:recipe_app/view_model/base_vm.dart';
 
 import '../../data/provider/auth_provider/google_auth_provider.dart';
 
-class GoogleAuthViewModel extends BaseViewModel {
-  GoogleAuthViewModel(super.ref);
+class GoogleFirebaseAuthViewModel extends BaseViewModel {
+  GoogleFirebaseAuthViewModel(super.ref);
 
   FutureManager googleSignInData = FutureManager();
 
@@ -12,7 +12,7 @@ class GoogleAuthViewModel extends BaseViewModel {
     googleSignInData.load();
     notifyListeners();
     final result =
-        await ref.read(googleAuthServiceProvider).signInWithGoogle(ref);
+        await ref.read(googleFirebaseAuthServiceProvider).signInWithGoogle(ref);
     if (result != null) {
       googleSignInData.onSuccess(result);
       notifyListeners();
