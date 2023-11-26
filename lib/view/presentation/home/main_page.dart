@@ -12,33 +12,19 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: StorageHelper.getBool('truGoogleAuth') == true
-          ? FutureBuilder<UserCredential?>(
-              future: ref.read(googleAuthViewModel).signInWithGoogle(ref),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return const Center(child: Text("Something Went Wrong"));
-                } else if (snapshot.hasData) {
-                  return const DashboardScreen();
-                } else {
-                  return const SignInScreen();
-                }
-              })
-          : StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return const Center(child: Text("Something Went Wrong"));
-                } else if (snapshot.hasData) {
-                  return const DashboardScreen();
-                } else {
-                  return const SignInScreen();
-                }
-              }),
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return const Center(child: Text("Something Went Wrong"));
+            } else if (snapshot.hasData) {
+              return const DashboardScreen();
+            } else {
+              return const SignInScreen();
+            }
+          }),
     );
   }
 }

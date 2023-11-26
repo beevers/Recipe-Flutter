@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class StorageHelper {
   static final appLocalStorage = Hive.box('app-local-storage');

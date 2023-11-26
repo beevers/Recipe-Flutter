@@ -15,6 +15,8 @@ import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/card/tick_card.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
+import '../../../data/helper/storage_helper.dart';
+
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
   @override
@@ -138,6 +140,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     function: () async {
                       FocusScope.of(context).unfocus();
                       if (_formKeyS.currentState!.validate()) {
+                        StorageHelper.setString(
+                            'username', susernameController.text);
                         final response =
                             await ref.read(authVmProvider).signUp();
                         // print(response);
@@ -156,5 +160,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  dispose() {
+    susernameController.dispose();
+    semailController.dispose();
+    spasswordController.dispose();
+    super.dispose();
   }
 }

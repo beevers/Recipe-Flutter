@@ -19,6 +19,10 @@ import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
+import '../../../data/helper/storage_helper.dart';
+import '../../../data/provider/auth_provider/google_auth_provider.dart';
+import '../home/main_page.dart';
+
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
   @override
@@ -124,7 +128,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     imageTitle: "assets/images/onboarding/google.png",
                     color: red,
                     isLoading: false,
-                    function: () {},
+                    function: () {
+                      ref.read(googleAuthViewModel).signInWithGoogle();
+                      Get.to(() => const DashboardScreen());
+                    },
                     isLarge: true),
                 HelpSpace.h(24),
                 RichText(
