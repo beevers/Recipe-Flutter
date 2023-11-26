@@ -105,9 +105,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       if (_formKey.currentState!.validate()) {
                         final response =
                             await ref.read(authVmProvider).signIn();
-                        // print(response);
                         if (response) {
-                          Get.to(() => const DashboardScreen());
+                          // Get.to(() => const DashboardScreen());
                         }
                       } else {
                         return NotifyUser.showAlert(

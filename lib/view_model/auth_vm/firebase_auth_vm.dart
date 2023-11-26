@@ -37,4 +37,9 @@ class AuthViewModel extends BaseViewModel {
       return false;
     }
   }
+
+  Future<bool> verifyEmail() async {
+    final result = await ref.read(authServiceProvider).verifyEmail();
+    return result;
+  }
 }

@@ -9,7 +9,7 @@ import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
-import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
+import 'package:recipe_app/view/presentation/authentication/verify_email_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/card/tick_card.dart';
@@ -146,7 +146,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             await ref.read(authVmProvider).signUp();
                         if (response) {
                           NotifyUser.showAlert("Sign Up successful");
-                          Get.to(() => const SignInScreen());
+
+                          Get.to(() => const VerifyEmailScreen());
                         }
                       } else {
                         NotifyUser.showAlert(

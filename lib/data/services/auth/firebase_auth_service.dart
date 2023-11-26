@@ -5,9 +5,10 @@ import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart'
 class AuthService {
   Future<String> signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      print(response.user!.emailVerified);
       return "success";
     } on FirebaseAuthException catch (e) {
       debugPrint("AuthService Class Error- ${e.toString()}");
@@ -24,6 +25,16 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       debugPrint("AuthService ${e.toString()}");
       return e.message.toString();
+    }
+  }
+
+  Future<bool> verifyEmail() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      return true;
+    } on FirebaseAuthException catch (e) {
+      debugPrint("AuthService ${e.toString()}");
+      return false;
     }
   }
 }
