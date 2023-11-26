@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
+import 'package:recipe_app/data/helper/storage_helper.dart';
 
 class FirebaseAuthService {
   Future<String> signIn() async {
@@ -8,7 +9,7 @@ class FirebaseAuthService {
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      print(response.user!.emailVerified);
+      StorageHelper.setBool('isEmailVerified', response.user!.emailVerified);
       return "success";
     } on FirebaseAuthException catch (e) {
       debugPrint("FirebaseAuthService Class Error- ${e.toString()}");

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
@@ -139,20 +139,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ref.watch(firebaseAuthVmProvider).signUpData.loading,
                     title: "Sign Up",
                     function: () async {
-                      Get.to(() => const VerifyEmailScreen());
                       FocusScope.of(context).unfocus();
-                      // if (_formKeyS.currentState!.validate()) {
-                      //   StorageHelper.setString(
-                      //       'username', susernameController.text);
-                      //   final response =
-                      //       await ref.read(authVmProvider).signUp();
-                      //   if (response) {
-                      //     NotifyUser.showAlert("Sign Up successful");
-                      //   }
-                      // } else {
-                      //   NotifyUser.showAlert(
-                      //       "Please fill all the required fields");
-                      // }
+                      if (_formKeyS.currentState!.validate()) {
+                        StorageHelper.setString(
+                            'username', susernameController.text);
+                        final response =
+                            await ref.read(firebaseAuthVmProvider).signUp();
+                        if (response) {
+                          Get.to(() => const VerifyEmailScreen());
+                          NotifyUser.showAlert("Sign Up successful");
+                        }
+                      } else {
+                        NotifyUser.showAlert(
+                            "Please fill all the required fields");
+                      }
                     },
                     isLarge: true),
               ],
