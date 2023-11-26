@@ -4,9 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app/view/dashboard_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
 
-import '../../../data/helper/storage_helper.dart';
-import '../../../data/provider/auth_provider/google_auth_provider.dart';
-
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
   @override

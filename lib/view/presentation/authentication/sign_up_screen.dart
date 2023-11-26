@@ -144,7 +144,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             'username', susernameController.text);
                         final response =
                             await ref.read(authVmProvider).signUp();
-                        // print(response);
                         if (response) {
                           Get.to(() => const SignInScreen());
                         }
