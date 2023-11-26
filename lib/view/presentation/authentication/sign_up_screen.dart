@@ -27,7 +27,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final isValidated = true;
   final GlobalKey<FormState> _formKeyS = GlobalKey<FormState>();
   final isObscure = StateProvider<bool>((ref) {
-    return false;
+    return true;
   });
   @override
   Widget build(BuildContext context) {
@@ -145,6 +145,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         final response =
                             await ref.read(authVmProvider).signUp();
                         if (response) {
+                          NotifyUser.showAlert("Sign Up successful");
                           Get.to(() => const SignInScreen());
                         }
                       } else {
@@ -159,13 +160,5 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  dispose() {
-    susernameController.dispose();
-    semailController.dispose();
-    spasswordController.dispose();
-    super.dispose();
   }
 }

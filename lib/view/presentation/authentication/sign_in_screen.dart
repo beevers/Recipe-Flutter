@@ -29,7 +29,7 @@ class SignInScreen extends ConsumerStatefulWidget {
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final isObscure = StateProvider<bool>((ref) {
-    return false;
+    return true;
   });
   @override
   Widget build(BuildContext context) {
