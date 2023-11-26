@@ -41,7 +41,7 @@ class SearchFormField extends ConsumerWidget {
             suffixIcon: IconButton(
               icon: Icon(suffixIcon),
               onPressed: () {
-                controller.text = "";
+                controller.clear();
               },
             ),
             hintStyle: RecipeText.small(),
