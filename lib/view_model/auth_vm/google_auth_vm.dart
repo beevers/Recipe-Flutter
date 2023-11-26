@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../data/helper/storage_helper.dart';
+
 // ViewModel class responsible for handling Google Authentication
 class GoogleAuthViewModel extends ChangeNotifier {
   final _loadingProvider = StateProvider<bool>((ref) => false);
@@ -36,6 +38,7 @@ class GoogleAuthViewModel extends ChangeNotifier {
       final logDetails =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
+      StorageHelper.setBool('truGoogleAuth', true);
       // Return the user credential details
       return logDetails;
     } on FirebaseAuthException catch (e) {
