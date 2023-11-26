@@ -100,8 +100,6 @@ class AppFormField extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.only(left: 20.w, right: 20.w),
       child: SizedBox(
-        width: double.infinity,
-        height: 56.h,
         child: TextFormField(
           readOnly: readOnly ?? false,
           onTap: onTap,

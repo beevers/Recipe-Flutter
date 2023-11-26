@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/data/provider/auth_provider/auth_provider.dart';
 import 'package:recipe_app/data/services/email_auth_service.dart';
-import 'package:recipe_app/view_model/auth_vm.dart';
+import 'package:recipe_app/view_model/auth_vm/auth_vm.dart';
 
 void main() {
   group('Auth Provider', () {

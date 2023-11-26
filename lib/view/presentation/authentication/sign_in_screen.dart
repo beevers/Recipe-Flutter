@@ -34,129 +34,126 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   Widget build(BuildContext context) {
     final authVm = ref.watch(authVmProvider);
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.only(top: 107),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Welcome Back!",
-                    style: RecipeText.big(),
-                  ),
-                  HelpSpace.h(8),
-                  Text(
-                    "Please enter your account here",
-                    style: RecipeText.small(),
-                  ),
-                  HelpSpace.h(32),
-                  AppFormField(
-                      isIcon: true,
-                      prefixIcon: IconlyLight.message,
-                      isObscure: false,
-                      validator: (value) =>
-                          ValidationHelper.isValidEmail(value.toString()),
-                      controller: emailController,
-                      title: "Email address"),
-                  HelpSpace.h(16),
-                  AppFormField(
-                      isIcon: true,
-                      prefixIcon: IconlyLight.lock,
-                      suffixAction: () {
-                        ref.read(isObscure.notifier).state =
-                            !ref.read(isObscure);
-                      },
-                      suffixIcon: ref.watch(isObscure)
-                          ? IconlyLight.show
-                          : IconlyLight.hide,
-                      isObscure: ref.watch(isObscure),
-                      validator: (value) => ValidationHelper.isValidInput(
-                          value.toString(),
-                          minLength: 5),
-                      controller: passwordController,
-                      title: "Password"),
-                  HelpSpace.h(24),
-                  Padding(
-                    padding: EdgeInsets.only(right: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => const PasswordRecoveryScreen());
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: RecipeText.small(
-                                color: const Color(0xff2e3d5c)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  HelpSpace.h(72),
-                  AppButton(
-                      isLoading: authVm.signInData.loading,
-                      title: "Login",
-                      function: () async {
-                        FocusScope.of(context).unfocus();
-                        if (_formKey.currentState!.validate()) {
-                          final response =
-                              await ref.read(authVmProvider).signIn();
-                          // print(response);
-                          if (response) {
-                            Get.to(() => const DashboardScreen());
-                          }
-                        } else {
-                          return NotifyUser.showAlert(
-                              "Please fill all the required fields");
-                        }
-                      },
-                      isLarge: true),
-                  HelpSpace.h(24),
-                  Text(
-                    "Or continue with",
-                    style: RecipeText.small(),
-                  ),
-                  HelpSpace.h(24),
-                  AppButton(
-                      imageTitle: "assets/images/onboarding/google.png",
-                      color: red,
-                      isLoading: false,
-                      function: () {},
-                      isLarge: true),
-                  HelpSpace.h(24),
-                  RichText(
-                      text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff2e3d5c),
-                    ),
-                    children: <TextSpan>[
-                      const TextSpan(text: "Don't have any account? "),
-                      TextSpan(
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(context,
-                                SlideLeftRoute(page: const SignUpScreen()));
-                          },
-                        text: 'Sign Up',
-                        style: const TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff1fcc79),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome Back!",
+                  style: RecipeText.big(),
+                ),
+                HelpSpace.h(8),
+                Text(
+                  "Please enter your account here",
+                  style: RecipeText.small(),
+                ),
+                HelpSpace.h(32),
+                AppFormField(
+                    isIcon: true,
+                    prefixIcon: IconlyLight.message,
+                    isObscure: false,
+                    validator: (value) =>
+                        ValidationHelper.isValidEmail(value.toString()),
+                    controller: emailController,
+                    title: "Email address"),
+                HelpSpace.h(16),
+                AppFormField(
+                    isIcon: true,
+                    prefixIcon: IconlyLight.lock,
+                    suffixAction: () {
+                      ref.read(isObscure.notifier).state = !ref.read(isObscure);
+                    },
+                    suffixIcon: ref.watch(isObscure)
+                        ? IconlyLight.show
+                        : IconlyLight.hide,
+                    isObscure: ref.watch(isObscure),
+                    validator: (value) => ValidationHelper.isValidInput(
+                        value.toString(),
+                        minLength: 5),
+                    controller: passwordController,
+                    title: "Password"),
+                HelpSpace.h(24),
+                Padding(
+                  padding: EdgeInsets.only(right: 20.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const PasswordRecoveryScreen());
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style:
+                              RecipeText.small(color: const Color(0xff2e3d5c)),
                         ),
                       ),
                     ],
-                  ))
-                ],
-              ),
+                  ),
+                ),
+                HelpSpace.h(72),
+                AppButton(
+                    isLoading: authVm.signInData.loading,
+                    title: "Login",
+                    function: () async {
+                      FocusScope.of(context).unfocus();
+                      if (_formKey.currentState!.validate()) {
+                        final response =
+                            await ref.read(authVmProvider).signIn();
+                        // print(response);
+                        if (response) {
+                          Get.to(() => const DashboardScreen());
+                        }
+                      } else {
+                        return NotifyUser.showAlert(
+                            "Please fill all the required fields");
+                      }
+                    },
+                    isLarge: true),
+                HelpSpace.h(24),
+                Text(
+                  "Or continue with",
+                  style: RecipeText.small(),
+                ),
+                HelpSpace.h(24),
+                AppButton(
+                    imageTitle: "assets/images/onboarding/google.png",
+                    color: red,
+                    isLoading: false,
+                    function: () {},
+                    isLarge: true),
+                HelpSpace.h(24),
+                RichText(
+                    text: TextSpan(
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xff2e3d5c),
+                  ),
+                  children: <TextSpan>[
+                    const TextSpan(text: "Don't have any account? "),
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(context,
+                              SlideLeftRoute(page: const SignUpScreen()));
+                        },
+                      text: 'Sign Up',
+                      style: const TextStyle(
+                        fontFamily: "Inter",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff1fcc79),
+                      ),
+                    ),
+                  ],
+                ))
+              ],
             ),
           ),
         ),
