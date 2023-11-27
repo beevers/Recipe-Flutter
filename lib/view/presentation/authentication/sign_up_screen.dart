@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/process_helper.dart';
@@ -145,17 +144,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       function: () async {
                         FocusScope.of(context).unfocus();
                         if (_formKeyS.currentState!.validate()) {
-                          //   StorageHelper.setString(
-                          //       'username', susernameController.text);
-                          //   final response =
-                          //       await ref.read(firebaseAuthVmProvider).signUp();
-                          //   if (response) {
-                          //     Get.to(() => const VerifyEmailScreen());
-                          //     NotifyUser.showAlert("Sign Up successful");
-                          //   }
-                          // } else {
-                          //   NotifyUser.showAlert(
-                          //       "Please fill all the required fields");
+                          StorageHelper.setString(
+                              'username', susernameController.text);
+                          final response =
+                              await ref.read(firebaseAuthVmProvider).signUp();
+                          if (response) {
+                            Get.to(() => const VerifyEmailScreen());
+                            NotifyUser.showAlert("Sign Up successful");
+                          }
+                        } else {
+                          NotifyUser.showAlert(
+                              "Please fill all the required fields");
                         }
                       },
                       isLarge: true),
