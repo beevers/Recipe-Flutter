@@ -12,6 +12,28 @@ class AppServices {
     return formattedDate;
   }
 
+  static bool hasLowercase(String text) {
+    for (int i = 0; i < text.length; i++) {
+      if (text[i] != text[i].toUpperCase()) {
+        // The character at index i is lowercase
+        return true;
+      }
+    }
+    // No lowercase letters found
+    return false;
+  }
+
+  static bool hasUppercase(String text) {
+    for (int i = 0; i < text.length; i++) {
+      if (text[i] != text[i].toLowerCase()) {
+        // The character at index i is uppercase
+        return true;
+      }
+    }
+    // No uppercase letters found
+    return false;
+  }
+
   //This is add integer that are enclosed in strings
   static double addString(String fnum, String snum) {
     if (fnum.contains(",") || snum.contains(",")) {

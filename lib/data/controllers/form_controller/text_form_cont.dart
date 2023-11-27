@@ -10,3 +10,6 @@ final passwordController = TextEditingController();
 final susernameController = TextEditingController();
 final semailController = TextEditingController();
 final spasswordController = TextEditingController();
+
+//Reset Password Controller
+final resetPasswordController = TextEditingController();

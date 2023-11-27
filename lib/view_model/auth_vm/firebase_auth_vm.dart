@@ -8,6 +8,7 @@ class FirebaseAuthViewModel extends BaseViewModel {
   FutureManager signInData = FutureManager();
   FutureManager signUpData = FutureManager();
   FutureManager verifyEmailData = FutureManager();
+  FutureManager resetPasswordData = FutureManager();
 
   Future<bool> signUp() async {
     signUpData.load();
@@ -48,6 +49,21 @@ class FirebaseAuthViewModel extends BaseViewModel {
       return true;
     } else {
       verifyEmailData.onError("Error");
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> resetPassword(String email) async {
+    resetPasswordData.load();
+    final result =
+        await ref.read(firebaseAuthServiceProvider).resetPassword(email);
+    if (result) {
+      resetPasswordData.onSuccess("Success");
+      notifyListeners();
+      return true;
+    } else {
+      resetPasswordData.onError("Error");
       notifyListeners();
       return false;
     }

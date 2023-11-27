@@ -9,15 +9,17 @@ import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
-class PasswordRecoveryScreen extends ConsumerStatefulWidget {
-  const PasswordRecoveryScreen({super.key});
+import '../../../data/controllers/form_controller/text_form_cont.dart';
+import '../../../data/provider/auth_provider/firebase_auth_provider.dart';
+
+class PasswordResetScreen extends ConsumerStatefulWidget {
+  const PasswordResetScreen({super.key});
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PasswordRecoveryScreenState();
+      _PasswordResetScreenState();
 }
 
-class _PasswordRecoveryScreenState
-    extends ConsumerState<PasswordRecoveryScreen> {
+class _PasswordResetScreenState extends ConsumerState<PasswordResetScreen> {
   final isValidated = true;
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,12 @@ class _PasswordRecoveryScreenState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Password Recovery!",
+                  "Password Reset!",
                   style: RecipeText.big(),
                 ),
                 HelpSpace.h(8),
                 Text(
-                  "Enter your email to recover password",
+                  "Enter your email to reset password",
                   style: RecipeText.small(),
                 ),
                 HelpSpace.h(32),
@@ -46,14 +48,19 @@ class _PasswordRecoveryScreenState
                     validator: (value) {
                       return null;
                     },
-                    controller: TextEditingController(),
+                    controller: resetPasswordController,
                     title: "Enter email"),
                 HelpSpace.h(23),
                 AppButton(
-                    isLoading: false,
-                    title: "Request OTP",
+                    isLoading: ref
+                        .watch(firebaseAuthVmProvider)
+                        .resetPasswordData
+                        .loading,
+                    title: "Reset Password",
                     function: () {
-                      Get.to(() => const OtpScreen());
+                      ref
+                          .read(firebaseAuthVmProvider)
+                          .resetPassword(emailController.text.trim());
                     },
                     isLarge: true),
               ],

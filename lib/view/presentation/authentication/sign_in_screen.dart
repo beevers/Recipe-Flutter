@@ -11,7 +11,7 @@ import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/data/utils/page_transistion_utils.dart';
-import 'package:recipe_app/view/presentation/authentication/password_recovery_screen.dart';
+import 'package:recipe_app/view/presentation/authentication/password_reset_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/sign_up_screen.dart';
 import 'package:recipe_app/view/dashboard_screen.dart';
 import 'package:recipe_app/view/presentation/authentication/verify_email_screen.dart';
@@ -87,7 +87,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const PasswordRecoveryScreen());
+                          Get.to(() => const PasswordResetScreen());
                         },
                         child: Text(
                           "Forgot Password?",

@@ -38,4 +38,14 @@ class FirebaseAuthService {
       return false;
     }
   }
+
+  Future<bool> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      debugPrint("FirebaseAuthService ${e.toString()}");
+      return false;
+    }
+  }
 }

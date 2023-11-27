@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
+import 'package:recipe_app/data/helper/process_helper.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
@@ -24,138 +25,142 @@ class SignUpScreen extends ConsumerStatefulWidget {
 }
 
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
-  final isValidated = true;
+  StateProvider hasUppercaseProvider = StateProvider<bool>((ref) {
+    return false;
+  });
+  StateProvider hasLowercaseProvider = StateProvider<bool>((ref) {
+    return false;
+  });
   final GlobalKey<FormState> _formKeyS = GlobalKey<FormState>();
   final isObscure = StateProvider<bool>((ref) {
     return true;
   });
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 107),
-          child: Form(
-            key: _formKeyS,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome!",
-                  style: RecipeText.big(),
-                ),
-                HelpSpace.h(8),
-                Text(
-                  "Please enter your account here",
-                  style: RecipeText.small(),
-                ),
-                HelpSpace.h(32),
-                AppFormField(
-                    isIcon: true,
-                    prefixIcon: IconlyLight.profile,
-                    isObscure: false,
-                    validator: (value) =>
-                        ValidationHelper.isValidInput(value.toString()),
-                    controller: susernameController,
-                    title: "Username"),
-                HelpSpace.h(16),
-                AppFormField(
-                    isIcon: true,
-                    prefixIcon: IconlyLight.message,
-                    isObscure: false,
-                    validator: (value) =>
-                        ValidationHelper.isValidEmail(value.toString()),
-                    controller: semailController,
-                    title: "Email Address"),
-                HelpSpace.h(16),
-                AppFormField(
-                    suffixAction: () {
-                      ref.read(isObscure.notifier).state = !ref.read(isObscure);
-                    },
-                    isIcon: true,
-                    prefixIcon: IconlyLight.lock,
-                    suffixIcon: ref.watch(isObscure)
-                        ? IconlyLight.show
-                        : IconlyLight.hide,
-                    isObscure: ref.watch(isObscure),
-                    validator: (value) => ValidationHelper.isValidInput(
-                        value.toString(),
-                        minLength: 5),
-                    controller: spasswordController,
-                    title: "Password"),
-                HelpSpace.h(24),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Your password must contain:",
-                            style: RecipeText.medium(
-                                color: const Color(0xff3d5481)),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const TickCard(
-                                isValidated: true,
-                              ),
-                              HelpSpace.w(5),
-                              Text(
-                                "At least 6 characters",
-                                style: RecipeText.small(
-                                    color: isValidated
-                                        ? const Color(0xff2e3d5c)
-                                        : const Color(0xffa0a5c1)),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const TickCard(
-                                isValidated: false,
-                              ),
-                              HelpSpace.w(5),
-                              Text(
-                                "Contains a number",
-                                style: RecipeText.small(
-                                    color: isValidated
-                                        ? const Color(0xff2e3d5c)
-                                        : const Color(0xffa0a5c1)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 85),
+            child: Form(
+              key: _formKeyS,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome!",
+                    style: RecipeText.big(),
                   ),
-                ),
-                HelpSpace.h(23),
-                AppButton(
-                    isLoading:
-                        ref.watch(firebaseAuthVmProvider).signUpData.loading,
-                    title: "Sign Up",
-                    function: () async {
-                      FocusScope.of(context).unfocus();
-                      if (_formKeyS.currentState!.validate()) {
-                        StorageHelper.setString(
-                            'username', susernameController.text);
-                        final response =
-                            await ref.read(firebaseAuthVmProvider).signUp();
-                        if (response) {
-                          Get.to(() => const VerifyEmailScreen());
-                          NotifyUser.showAlert("Sign Up successful");
+                  HelpSpace.h(8),
+                  Text(
+                    "Please enter your account here",
+                    style: RecipeText.small(),
+                  ),
+                  HelpSpace.h(32),
+                  AppFormField(
+                      isIcon: true,
+                      prefixIcon: IconlyLight.profile,
+                      isObscure: false,
+                      validator: (value) =>
+                          ValidationHelper.isValidInput(value.toString()),
+                      controller: susernameController,
+                      title: "Username"),
+                  HelpSpace.h(16),
+                  AppFormField(
+                      isIcon: true,
+                      prefixIcon: IconlyLight.message,
+                      isObscure: false,
+                      validator: (value) =>
+                          ValidationHelper.isValidEmail(value.toString()),
+                      controller: semailController,
+                      title: "Email Address"),
+                  HelpSpace.h(14),
+                  AppFormField(
+                      onChanged: (value) {
+                        ref.read(hasUppercaseProvider.notifier).state =
+                            AppServices.hasUppercase(value);
+                        ref.read(hasLowercaseProvider.notifier).state =
+                            AppServices.hasLowercase(value);
+                        setState(() {});
+                      },
+                      suffixAction: () {
+                        ref.read(isObscure.notifier).state =
+                            !ref.read(isObscure);
+                      },
+                      isIcon: true,
+                      prefixIcon: IconlyLight.lock,
+                      suffixIcon: ref.watch(isObscure)
+                          ? IconlyLight.show
+                          : IconlyLight.hide,
+                      isObscure: ref.watch(isObscure),
+                      validator: (value) => ValidationHelper.isValidPassword(
+                          value.toString(),
+                          minLength: 5),
+                      controller: spasswordController,
+                      title: "Password"),
+                  HelpSpace.h(24),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Your password must contain:",
+                              style: RecipeText.medium(
+                                  color: const Color(0xff3d5481)),
+                            ),
+                            TickCardWidget(
+                                title: "At least 8 characters",
+                                isValidated:
+                                    spasswordController.text.length >= 8),
+                            TickCardWidget(
+                                title: "Contains a number and symbol",
+                                isValidated: spasswordController.text
+                                    .contains(RegExp(r'[0-9]'))),
+                            TickCardWidget(
+                                title: "Contains a symbol",
+                                isValidated: spasswordController.text
+                                    .contains(RegExp(r'\W'))),
+                            TickCardWidget(
+                                title: "Contains a uppercase",
+                                isValidated:
+                                    ref.watch(hasUppercaseProvider) == true),
+                            TickCardWidget(
+                                title: "Contains a lowercase",
+                                isValidated:
+                                    ref.watch(hasLowercaseProvider) == true),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  HelpSpace.h(23),
+                  AppButton(
+                      isLoading:
+                          ref.watch(firebaseAuthVmProvider).signUpData.loading,
+                      title: "Sign Up",
+                      function: () async {
+                        FocusScope.of(context).unfocus();
+                        if (_formKeyS.currentState!.validate()) {
+                          //   StorageHelper.setString(
+                          //       'username', susernameController.text);
+                          //   final response =
+                          //       await ref.read(firebaseAuthVmProvider).signUp();
+                          //   if (response) {
+                          //     Get.to(() => const VerifyEmailScreen());
+                          //     NotifyUser.showAlert("Sign Up successful");
+                          //   }
+                          // } else {
+                          //   NotifyUser.showAlert(
+                          //       "Please fill all the required fields");
                         }
-                      } else {
-                        NotifyUser.showAlert(
-                            "Please fill all the required fields");
-                      }
-                    },
-                    isLarge: true),
-              ],
+                      },
+                      isLarge: true),
+                ],
+              ),
             ),
           ),
         ),

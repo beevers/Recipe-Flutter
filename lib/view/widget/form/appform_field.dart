@@ -80,6 +80,7 @@ class AppFormField extends ConsumerWidget {
   final String? iconImage;
   final String title;
   final IconData? prefixIcon;
+  final Function(String)? onChanged;
   const AppFormField({
     this.suffixAction,
     this.readOnly,
@@ -93,6 +94,7 @@ class AppFormField extends ConsumerWidget {
     this.iconImage,
     this.suffixIcon,
     required this.title,
+    this.onChanged,
   });
 
   @override
@@ -101,6 +103,7 @@ class AppFormField extends ConsumerWidget {
       padding: EdgeInsets.only(left: 20.w, right: 20.w),
       child: SizedBox(
         child: TextFormField(
+          onChanged: onChanged,
           readOnly: readOnly ?? false,
           onTap: onTap,
           obscureText: isObscure,
