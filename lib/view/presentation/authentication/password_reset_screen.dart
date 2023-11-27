@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/view/presentation/authentication/otp_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
@@ -49,9 +50,8 @@ class _PasswordResetScreenState extends ConsumerState<PasswordResetScreen> {
                       isIcon: true,
                       prefixIcon: IconlyLight.message,
                       isObscure: false,
-                      validator: (value) {
-                        return null;
-                      },
+                      validator: (value) =>
+                          ValidationHelper.isValidEmail(value.toString()),
                       controller: resetPasswordController,
                       title: "Enter email"),
                   HelpSpace.h(23),
