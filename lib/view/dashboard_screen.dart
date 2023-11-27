@@ -28,9 +28,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final user = FirebaseAuth.instance.currentUser;
-    // print(user);
-    // print(user!.email);
     final screenVm = ref.watch(screenProvider);
     final getFoodVm = ref.watch(getFoodViewModel).getFoodData;
     return getFoodVm.autoloading
