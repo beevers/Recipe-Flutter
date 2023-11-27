@@ -63,6 +63,7 @@ class _PasswordResetScreenState extends ConsumerState<PasswordResetScreen> {
                       title: "Reset Password",
                       function: () async {
                         if (_formKeyS.currentState!.validate()) {
+                          FocusScope.of(context).unfocus();
                           final response = await ref
                               .read(firebaseAuthVmProvider.notifier)
                               .resetPassword(resetPasswordController.text);
