@@ -10,7 +10,7 @@ import 'package:recipe_app/data/utils/inject_server_err_chck_utils.dart';
 import 'package:recipe_app/model/formatted_response.dart';
 import 'package:recipe_app/data/utils/network.dart' as networkutils;
 
-abstract class ApiManager {
+class ApiManager {
   late Dio dio;
 
   final baseURL = 'https://api.spoonacular.com/';
@@ -29,7 +29,6 @@ abstract class ApiManager {
       headers: {
         'Content-Type': 'application/json', // Other headers if needed
       },
-      // queryParameters: {"apiKey": "b03417593d6a4bc184f111ce523397ca"},
       baseUrl: baseURL,
       receiveDataWhenStatusError: true,
       connectTimeout: const Duration(seconds: 60), // 60 seconds
@@ -37,16 +36,15 @@ abstract class ApiManager {
     );
 
     dio = Dio(options)
-      ..interceptors.add(DioCacheInterceptor(options: cacheOptions));
-    //TODO after autthentication check this out
-    // ..interceptors.add(InterceptorsWrapper(
-    //   onRequest: (options, handler) {
-    //     // Append the API key as a query parameter to every request
-    //     options.queryParameters['apiKey'] =
-    //         'b03417593d6a4bc184f111ce523397ca';
-    //     return handler.next(options);
-    //   },
-    // ));
+      ..interceptors.add(DioCacheInterceptor(options: cacheOptions))
+      ..interceptors.add(InterceptorsWrapper(
+        onRequest: (options, handler) {
+          // Append the API key as a query parameter to every request
+          options.queryParameters['apiKey'] =
+              'b03417593d6a4bc184f111ce523397ca';
+          return handler.next(options);
+        },
+      ));
   }
 
   //GET
