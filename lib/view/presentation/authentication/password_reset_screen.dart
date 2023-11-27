@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
@@ -21,6 +22,13 @@ class PasswordResetScreen extends ConsumerStatefulWidget {
 class _PasswordResetScreenState extends ConsumerState<PasswordResetScreen> {
   final isValidated = true;
   final GlobalKey<FormState> _formKeyS = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    resetPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
