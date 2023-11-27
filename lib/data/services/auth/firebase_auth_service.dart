@@ -39,6 +39,7 @@ class FirebaseAuthService {
     }
   }
 
+//TODO 1: Add resetPassword method
   Future<bool> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);

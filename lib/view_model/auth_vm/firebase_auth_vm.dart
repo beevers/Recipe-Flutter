@@ -58,12 +58,13 @@ class FirebaseAuthViewModel extends BaseViewModel {
     resetPasswordData.load();
     final result =
         await ref.read(firebaseAuthServiceProvider).resetPassword(email);
-    if (result) {
-      resetPasswordData.onSuccess("Success");
+
+    if (result == true) {
+      resetPasswordData.onSuccess("Password Reset Link Sent");
       notifyListeners();
       return true;
     } else {
-      resetPasswordData.onError("Error");
+      resetPasswordData.onError("Could not send reset link");
       notifyListeners();
       return false;
     }
