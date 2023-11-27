@@ -48,7 +48,7 @@ class FirebaseAuthViewModel extends BaseViewModel {
       notifyListeners();
       return true;
     } else {
-      verifyEmailData.onError("Error");
+      verifyEmailData.onError("Could not send verification link Try later");
       notifyListeners();
       return false;
     }

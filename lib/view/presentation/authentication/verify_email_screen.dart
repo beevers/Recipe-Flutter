@@ -6,6 +6,7 @@ import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart'
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
+import 'package:recipe_app/data/utils/notify_user.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
@@ -43,6 +44,7 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                 ),
                 HelpSpace.h(30),
                 AppFormField(
+                  readOnly: true,
                   isObscure: false,
                   validator: (data) =>
                       ValidationHelper.isValidEmail(data.toString()),
@@ -57,12 +59,17 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                         .watch(firebaseAuthVmProvider)
                         .verifyEmailData
                         .loading,
-                    title: "verify Email",
-                    function: () {
-                      ref.read(firebaseAuthVmProvider).verifyEmail();
-                      StorageHelper.getBool('isEmailVerified') == true
-                          ? Get.to(() => const DashboardScreen())
-                          : Get.to(() => const VerifyEmailScreen());
+                    title: "Verify Email",
+                    function: () async {
+                      final response =
+                          await ref.read(firebaseAuthVmProvider).verifyEmail();
+                      if (response) {
+                        StorageHelper.setBool('isEmailVerified', true);
+                        Get.offAll(() => const DashboardScreen());
+                      } else {
+                        NotifyUser.showAlert(
+                            "Error Could not send verification link Try later");
+                      }
                     },
                     isLarge: true),
                 HelpSpace.h(16),
