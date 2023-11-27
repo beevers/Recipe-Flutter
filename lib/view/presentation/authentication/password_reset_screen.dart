@@ -68,6 +68,8 @@ class _PasswordResetScreenState extends ConsumerState<PasswordResetScreen> {
                             NotifyUser.showAlert(
                                 "Password reset link sent to your email");
                           }
+                        } else {
+                          NotifyUser.showAlert("Please enter a valid email");
                         }
                       },
                       isLarge: true),
