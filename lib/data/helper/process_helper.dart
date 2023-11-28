@@ -3,6 +3,26 @@ import 'package:intl/intl.dart';
 abstract class AppServicesInterface {}
 
 class AppServices {
+  static String extractMinutes(String sentence) {
+    // Regular expression to match numeric values followed by the word "minutes"
+    RegExp regex = RegExp(r'(\d+)\s*minutes');
+
+    // Extract the match from the sentence
+    Match? match = regex.firstMatch(sentence);
+
+    // Check if a match is found
+    if (match != null) {
+      // Extract the numeric value from the match
+      String minutes = match.group(1)!;
+
+      print('$minutes mins');
+      return minutes;
+    } else {
+      print('No match found');
+      return '30';
+    }
+  }
+
   static String processDate(String dateTime) {
     DateTime formatted = DateTime.parse(dateTime);
 

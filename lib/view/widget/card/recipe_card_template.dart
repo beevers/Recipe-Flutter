@@ -69,7 +69,7 @@ class RecipeCardTemplate extends ConsumerWidget {
                   scale: 1.5,
                 ),
                 Text(
-                  " > 60 mins",
+                  " > $extractedMinutes mins",
                   style: RecipeText.small(),
                 ),
               ],

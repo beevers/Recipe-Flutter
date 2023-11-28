@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
+import 'package:recipe_app/data/helper/process_helper.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/presentation/other/recipe_detail_screen.dart';
@@ -99,7 +100,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                     ),
                   ),
-                  HelpSpace.h(24),
+                  HelpSpace.h(17),
                   const Divider(
                     color: Color(0xffF4F5F7),
                     thickness: 8,
@@ -137,6 +138,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           itemCount: foodVm
                               .searchResults!.length, // total number of items
                           itemBuilder: (context, index) {
+                            extractedMinutes = AppServices.extractMinutes(foodVm
+                                .searchResults![index].results![index].content
+                                .toString());
                             return foodVm.searchResults![index].results!.isEmpty
                                 ? Container()
                                 : RecipeCardTemplate(
