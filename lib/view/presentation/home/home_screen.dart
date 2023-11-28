@@ -114,8 +114,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                       padding:
                           const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: foodVm!.limit, // total number of items
+                      itemCount: foodVm!
+                          .searchResults!.length, // total number of items
                       itemBuilder: (context, index) {
+                        print(foodVm.limit);
                         return foodVm.searchResults![index].results!.isEmpty
                             ? Container()
                             : RecipeCardTemplate(
@@ -139,7 +141,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                       padding:
                           const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: foodVm.limit, // total number of items
+                      itemCount: 1, // total number of items
                       itemBuilder: (context, index) {
                         return RecipeCardTemplate(
                           index: index,
