@@ -116,11 +116,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           const EdgeInsets.all(8.0), // padding around the grid
                       itemCount: foodVm!.limit, // total number of items
                       itemBuilder: (context, index) {
-                        // print(foodVm.limit);
-                        // print(
-                        //     foodVm.searchResults![index].results![index].name);
-                        // print(
-                        //     foodVm.searchResults![index].results![index].image);
                         return foodVm.searchResults![index].results!.isEmpty
                             ? Container()
                             : RecipeCardTemplate(
