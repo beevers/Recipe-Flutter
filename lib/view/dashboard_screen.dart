@@ -31,7 +31,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final screenVm = ref.watch(screenProvider);
     final getFoodVm = ref.watch(getFoodViewModel).getFoodData;
     return getFoodVm.autoloading
-        ? const Center(child: CircularProgressIndicator())
+        ? Center(
+            child: CircularProgressIndicator(
+            color: green,
+          ))
         : WillPopScope(
             onWillPop: () async => Future.value(false),
             child: Scaffold(

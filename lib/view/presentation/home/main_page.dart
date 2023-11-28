@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app/view/dashboard_screen.dart';
-import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
