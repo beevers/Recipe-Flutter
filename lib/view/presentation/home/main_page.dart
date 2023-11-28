@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
+import 'package:recipe_app/view/dashboard_screen.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(body: SignInScreen()
+    return const Scaffold(body: DashboardScreen()
         // StreamBuilder<User?>(
         //     stream: FirebaseAuth.instance.authStateChanges(),
         //     builder: (context, snapshot) {

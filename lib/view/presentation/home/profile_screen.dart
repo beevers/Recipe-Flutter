@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/helper/storage_helper.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -28,6 +29,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         AppButton(
           isLoading: false,
           function: () {
+            StorageHelper.setBool('active', false);
             FirebaseAuth.instance.signOut();
           },
           isLarge: false,
@@ -37,6 +39,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         AppButton(
           isLoading: false,
           function: () {
+            StorageHelper.setBool('active', false);
             GoogleSignIn().signOut();
           },
           isLarge: false,

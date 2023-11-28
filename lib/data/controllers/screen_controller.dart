@@ -15,7 +15,7 @@ class SizeManager extends StatelessWidget {
       // print(constraint.minHeight);
       // print(constraint.minWidth);
       return constraint.maxHeight < 900 && constraint.maxWidth < 450
-          ? StorageHelper.getBool('isLoggedIn') == true
+          ? StorageHelper.getBool('active') == true
               ? const DashboardScreen()
               : const OnboardScreen()
           : Text(

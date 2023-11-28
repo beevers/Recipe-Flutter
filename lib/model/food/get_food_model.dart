@@ -58,7 +58,7 @@ class FoodModelDataResult {
   String? image;
   String? link;
   String? type;
-  int? relevance;
+  num? relevance;
   String? content;
 
   FoodModelDataResult(

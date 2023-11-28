@@ -60,7 +60,7 @@ FoodModelDataResult _$FoodModelDataResultFromJson(Map<String, dynamic> json) =>
       image: json['image'] as String?,
       link: json['link'] as String?,
       type: json['type'] as String?,
-      relevance: json['relevance'] as int?,
+      relevance: json['relevance'] as num,
       content: json['content'] as String?,
     );
 

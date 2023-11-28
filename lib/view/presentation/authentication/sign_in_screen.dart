@@ -108,7 +108,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         final response =
                             await ref.read(firebaseAuthVmProvider).signIn();
                         if (response) {
-                          StorageHelper.setBool('isLoggedIn', true);
+                          StorageHelper.setBool('active', true);
                           StorageHelper.getBool('isEmailVerified') == true
                               ? Get.to(() => const DashboardScreen())
                               : Get.to(() => const VerifyEmailScreen());
