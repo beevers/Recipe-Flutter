@@ -19,7 +19,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(getFoodViewModel).getFood(number: 8, query: "chicken");
+      ref.read(getFoodViewModel).getFood(number: 8, query: "beef");
     });
     controller = PageController(
         initialPage: ref.read(screenIndexProvider), keepPage: true);
@@ -127,11 +127,5 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   FloatingActionButtonLocation.centerDocked,
             ),
           );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 }
