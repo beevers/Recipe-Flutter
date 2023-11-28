@@ -20,7 +20,7 @@ class RecipeCardTemplate extends ConsumerWidget {
       onTap: onTap,
       child: SizedBox(
         width: 151.w,
-        height: 264.h,
+        height: 250.h,
         child: Column(
           children: [
             Row(
@@ -36,9 +36,12 @@ class RecipeCardTemplate extends ConsumerWidget {
               ],
             ),
             HelpSpace.h(16),
-            RecipeCard(
-              image: foodVm!.searchResults![index].results![index].image
-                  .toString(),
+            RecipeImage(
+              image: foodVm!.searchResults![index].results![index].image!
+                      .contains('wximages')
+                  ? 'https://ca-times.brightspotcdn.com/dims4/default/fc493d2/2147483647/strip/false/crop/3982x2556+0+0/resize/1486x954!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F01%2F5f%2Fb0da1d324e06bbb11ea6e419a8da%2F1250986-fo-toadstool-cafe20-mam.jpg'
+                  : foodVm.searchResults![index].results![index].image
+                      .toString(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,

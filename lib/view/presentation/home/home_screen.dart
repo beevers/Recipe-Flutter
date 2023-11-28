@@ -109,7 +109,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       controller: controller,
                       children: [
                         // // Content for Tab 1
-
                         GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -124,8 +123,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           itemCount: foodVm
                               .searchResults!.length, // total number of items
                           itemBuilder: (context, index) {
-                            print('her');
-                            print(foodVm.limit);
+                            print(foodVm
+                                .searchResults![index].results![index].image);
                             return foodVm.searchResults![index].results!.isEmpty
                                 ? Container()
                                 : RecipeCardTemplate(

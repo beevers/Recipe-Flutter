@@ -5,18 +5,18 @@ import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 
-class RecipeCard extends ConsumerWidget {
+class RecipeImage extends ConsumerWidget {
   final String image;
 
-  const RecipeCard({super.key, required this.image});
+  const RecipeImage({super.key, required this.image});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       alignment: Alignment.topRight,
       children: [
         SizedBox(
-          width: 151,
-          height: 151,
+          width: 140,
+          height: 140,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
