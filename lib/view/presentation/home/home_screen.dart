@@ -14,6 +14,9 @@ import 'package:recipe_app/view/widget/card/filter_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card_template.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
+import '../../../data/provider/global_provider/global_var.dart';
+import '../../../data/provider/screen_provider.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -22,6 +25,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen>
     with SingleTickerProviderStateMixin {
+  StateProvider<int?> selectedIndexProvider = StateProvider<int?>((ref) => 0);
   late final TabController controller;
   @override
   void initState() {
@@ -77,11 +81,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Row(
-                        children: List.generate(
-                            5,
-                            (index) => FilterCard(
-                                  index: index,
-                                )),
+                        children: List.generate(5, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: FilterCard(
+                              selectedIndex: ref.watch(selectedIndexProvider),
+                              function: () {
+                                ref.read(selectedIndexProvider.notifier).state =
+                                    index;
+                                ref.read(optionProvider.notifier).state =
+                                    option[index];
+                              },
+                              index: index,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                   ),
@@ -123,8 +137,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           itemCount: foodVm
                               .searchResults!.length, // total number of items
                           itemBuilder: (context, index) {
-                            print(foodVm
-                                .searchResults![index].results![index].image);
                             return foodVm.searchResults![index].results!.isEmpty
                                 ? Container()
                                 : RecipeCardTemplate(

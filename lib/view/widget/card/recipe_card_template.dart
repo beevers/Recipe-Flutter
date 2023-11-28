@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
+import 'package:recipe_app/data/provider/global_provider/global_var.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/card/profile_pic_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card.dart';
@@ -59,7 +60,7 @@ class RecipeCardTemplate extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  "Food",
+                  ref.watch(optionProvider),
                   style: RecipeText.small(),
                 ),
                 HelpSpace.w(2),

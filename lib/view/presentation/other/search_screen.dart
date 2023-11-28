@@ -106,8 +106,8 @@ class SearchScreen extends ConsumerWidget {
             ),
             HelpSpace.h(24),
             Row(
-              children:
-                  List.generate(3, (index) => FilterCard(index: index + 1)),
+              children: List.generate(
+                  3, (index) => FilterCard(function: () {}, index: index + 1)),
             )
           ],
         ),
@@ -148,7 +148,8 @@ class _SearchSheetContentState extends ConsumerState<SearchSheetContent> {
             ),
             HelpSpace.h(31),
             Row(
-              children: List.generate(3, (index) => FilterCard(index: index)),
+              children: List.generate(
+                  3, (index) => FilterCard(function: () {}, index: index)),
             ),
             HelpSpace.h(32),
             Row(

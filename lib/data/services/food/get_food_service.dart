@@ -9,7 +9,6 @@ class GetFoodService extends ApiManager {
     final response = await getHttp(
       "$getFoodUrl?query=$query&number=$number",
     );
-    print("GetFoodService - ${response.data}");
     return FoodModel.fromJson(response.data);
   }
 }
