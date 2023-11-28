@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 
@@ -30,7 +31,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             FirebaseAuth.instance.signOut();
           },
           isLarge: false,
-          title: "Sign Out",
+          title: "Firebase Sign Out",
+        ),
+        HelpSpace.h(20),
+        AppButton(
+          isLoading: false,
+          function: () {
+            GoogleSignIn().signOut();
+          },
+          isLarge: false,
+          title: "Google Sign Out",
         ),
         const Text("Profile Screen"),
       ],
