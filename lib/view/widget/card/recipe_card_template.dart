@@ -37,7 +37,8 @@ class RecipeCardTemplate extends ConsumerWidget {
             ),
             HelpSpace.h(16),
             RecipeCard(
-              index: index,
+              image: foodVm!.searchResults![index].results![index].image
+                  .toString(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -45,7 +46,7 @@ class RecipeCardTemplate extends ConsumerWidget {
                 SizedBox(
                   width: 150,
                   child: Text(
-                    "${foodVm!.searchResults![index].results![index].name}",
+                    "${foodVm.searchResults![index].results![index].name}",
                     maxLines: 1,
                     style: RecipeText.medium(color: const Color(0xff3d5481)),
                   ),

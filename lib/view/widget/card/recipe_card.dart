@@ -6,12 +6,11 @@ import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 
 class RecipeCard extends ConsumerWidget {
-  final int index;
+  final String image;
 
-  const RecipeCard({super.key, required this.index});
+  const RecipeCard({super.key, required this.image});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final foodVm = ref.watch(getFoodViewModel).getFoodData.data;
     return Stack(
       alignment: Alignment.topRight,
       children: [
@@ -21,7 +20,7 @@ class RecipeCard extends ConsumerWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
-              "${foodVm!.searchResults![index].results![index].image}",
+              image,
               fit: BoxFit.cover,
             ),
           ),

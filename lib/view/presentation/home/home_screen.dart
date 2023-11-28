@@ -32,128 +32,136 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final foodVm = ref.watch(getFoodViewModel).getFoodData.data;
-    return Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Center(
-          child: Column(
-            children: [
-              AppFormField(
-                readOnly: true,
-                onTap: () {
-                  Get.to(() => const SearchScreen());
-                },
-                isObscure: false,
-                validator: (v) {
-                  return null;
-                },
-                controller: TextEditingController(),
-                isIcon: true,
-                title: "Search",
-                prefixIcon: IconlyLight.search,
-              ),
-              HelpSpace.h(16),
-              Padding(
-                padding: EdgeInsets.only(left: 20.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Category",
-                      style: RecipeText.medium(color: const Color(0xff3d5481)),
-                    ),
-                  ],
-                ),
-              ),
-              HelpSpace.h(16),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10.w),
-                  child: Row(
-                    children: List.generate(
-                        5,
-                        (index) => FilterCard(
-                              index: index,
-                            )),
+    return foodVm == null
+        ? Center(
+            child: CircularProgressIndicator(
+              color: green,
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: Center(
+              child: Column(
+                children: [
+                  AppFormField(
+                    readOnly: true,
+                    onTap: () {
+                      Get.to(() => const SearchScreen());
+                    },
+                    isObscure: false,
+                    validator: (v) {
+                      return null;
+                    },
+                    controller: TextEditingController(),
+                    isIcon: true,
+                    title: "Search",
+                    prefixIcon: IconlyLight.search,
                   ),
-                ),
-              ),
-              HelpSpace.h(24),
-              const Divider(
-                color: Color(0xffF4F5F7),
-                thickness: 8,
-              ),
-              HelpSpace.h(5),
-              TabBar(
-                labelColor: const Color(0xff3E5481),
-                unselectedLabelColor: grey,
-                indicatorWeight: 3,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: green,
-                controller: controller,
-                tabs: const [
-                  Tab(text: "Left"),
-                  Tab(text: "Right"),
+                  HelpSpace.h(16),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Category",
+                          style:
+                              RecipeText.medium(color: const Color(0xff3d5481)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  HelpSpace.h(16),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: Row(
+                        children: List.generate(
+                            5,
+                            (index) => FilterCard(
+                                  index: index,
+                                )),
+                      ),
+                    ),
+                  ),
+                  HelpSpace.h(24),
+                  const Divider(
+                    color: Color(0xffF4F5F7),
+                    thickness: 8,
+                  ),
+                  HelpSpace.h(5),
+                  TabBar(
+                    labelColor: const Color(0xff3E5481),
+                    unselectedLabelColor: grey,
+                    indicatorWeight: 3,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: green,
+                    controller: controller,
+                    tabs: const [
+                      Tab(text: "Left"),
+                      Tab(text: "Right"),
+                    ],
+                  ),
+                  HelpSpace.h(8),
+                  Expanded(
+                    child: TabBarView(
+                      controller: controller,
+                      children: [
+                        // // Content for Tab 1
+
+                        GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // number of items in each row
+                            mainAxisSpacing: 12.5, // spacing between rows
+                            crossAxisSpacing: 12.5, // spacing between columns
+                            childAspectRatio:
+                                0.67, // Adjust this value to control aspect ratio
+                          ),
+                          padding: const EdgeInsets.all(
+                              8.0), // padding around the grid
+                          itemCount: foodVm
+                              .searchResults!.length, // total number of items
+                          itemBuilder: (context, index) {
+                            print('her');
+                            print(foodVm.limit);
+                            return foodVm.searchResults![index].results!.isEmpty
+                                ? Container()
+                                : RecipeCardTemplate(
+                                    index: index,
+                                    onTap: () {
+                                      Get.to(() => const RecipeDetailScreen());
+                                    },
+                                  );
+                          },
+                        ),
+
+                        // Content for Tab 2
+                        GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // number of items in each row
+                            mainAxisSpacing: 12.5, // spacing between rows
+                            crossAxisSpacing: 12.5, // spacing between columns
+                            childAspectRatio:
+                                0.67, // Adjust this value to control aspect ratio
+                          ),
+                          padding: const EdgeInsets.all(
+                              8.0), // padding around the grid
+                          itemCount: 1, // total number of items
+                          itemBuilder: (context, index) {
+                            return RecipeCardTemplate(
+                              index: index,
+                              onTap: null,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              HelpSpace.h(8),
-              Expanded(
-                child: TabBarView(
-                  controller: controller,
-                  children: [
-                    // // Content for Tab 1
-
-                    GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // number of items in each row
-                        mainAxisSpacing: 12.5, // spacing between rows
-                        crossAxisSpacing: 12.5, // spacing between columns
-                        childAspectRatio:
-                            0.67, // Adjust this value to control aspect ratio
-                      ),
-                      padding:
-                          const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: foodVm!
-                          .searchResults!.length, // total number of items
-                      itemBuilder: (context, index) {
-                        print(foodVm.limit);
-                        return foodVm.searchResults![index].results!.isEmpty
-                            ? Container()
-                            : RecipeCardTemplate(
-                                index: index,
-                                onTap: () {
-                                  Get.to(() => const RecipeDetailScreen());
-                                },
-                              );
-                      },
-                    ),
-
-                    // Content for Tab 2
-                    GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // number of items in each row
-                        mainAxisSpacing: 12.5, // spacing between rows
-                        crossAxisSpacing: 12.5, // spacing between columns
-                        childAspectRatio:
-                            0.67, // Adjust this value to control aspect ratio
-                      ),
-                      padding:
-                          const EdgeInsets.all(8.0), // padding around the grid
-                      itemCount: 1, // total number of items
-                      itemBuilder: (context, index) {
-                        return RecipeCardTemplate(
-                          index: index,
-                          onTap: null,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ));
+            ));
   }
 }

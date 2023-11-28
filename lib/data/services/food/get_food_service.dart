@@ -7,7 +7,7 @@ class GetFoodService extends ApiManager {
   Future<FoodModel> getFoodService({required int number, String? query}) async {
     // Map<String, dynamic> params = {"query": query, "number": number};
     final response = await getHttp(
-      "/food/search?number=$number",
+      "$getFoodUrl?query=$query&number=$number",
     );
     print("GetFoodService - ${response.data}");
     return FoodModel.fromJson(response.data);
