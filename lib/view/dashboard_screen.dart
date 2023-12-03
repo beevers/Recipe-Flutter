@@ -30,7 +30,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   Widget build(BuildContext context) {
     final screenVm = ref.watch(screenProvider);
     return WillPopScope(
-      onWillPop: () async => Future.value(false),
+      onWillPop: () async {
+        ref.read(screenIndexProvider.notifier).state = 0;
+        return Future.value(false);
+      },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
