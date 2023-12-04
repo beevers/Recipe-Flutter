@@ -47,7 +47,7 @@ class RecipeApp extends ConsumerWidget {
                         const RoundSliderThumbShape(enabledThumbRadius: 10),
                     overlayShape:
                         const RoundSliderOverlayShape(overlayRadius: 10))),
-            home: const SizeManager());
+            home: const Test());
       },
     );
   }
