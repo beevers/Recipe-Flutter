@@ -39,7 +39,7 @@ class RecipeApp extends ConsumerWidget {
             theme: ThemeData(
                 useMaterial3: true,
                 sliderTheme: SliderThemeData(
-                    trackHeight: 5,
+                    trackHeight: 4,
                     activeTrackColor: green,
                     thumbColor: green,
                     overlayColor: const Color(0x015eb155),
