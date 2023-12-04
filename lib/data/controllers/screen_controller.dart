@@ -4,7 +4,9 @@ import 'package:recipe_app/view/dashboard_screen.dart';
 import 'package:recipe_app/view/presentation/onboarding/onboard_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 
+/// A widget that manages the size and layout of the main content based on the device's screen dimensions.
 class SizeManager extends StatelessWidget {
+  /// Constructs a new instance of SizeManager.
   const SizeManager({super.key});
 
   @override
@@ -14,10 +16,15 @@ class SizeManager extends StatelessWidget {
           ? StorageHelper.getBool('active') == true
               ? const DashboardScreen()
               : const OnboardScreen()
-          : Text(
-              "Web View in progress",
-              style: RecipeText.big(),
-            );
+          : _buildWebViewInProgressText();
     });
+  }
+
+  /// Builds the "Web View in progress" text widget.
+  Widget _buildWebViewInProgressText() {
+    return Text(
+      "Web View in progress",
+      style: RecipeText.big(),
+    );
   }
 }
