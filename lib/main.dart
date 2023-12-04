@@ -19,7 +19,6 @@ Future<void> main() async {
 
   await Hive.initFlutter();
   await Hive.openBox('app-local-storage');
-  // await dotenv.load(fileName: ".env");
   runApp(const ProviderScope(child: RecipeApp()));
 }
 
