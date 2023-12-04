@@ -27,12 +27,12 @@ class RecipeApp extends ConsumerWidget {
   const RecipeApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final phoneWidth = MediaQuery.of(context).size.width;
+    final phoneHeight = MediaQuery.of(context).size.height;
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
-      designSize: Size(width, height),
+      designSize: Size(phoneWidth, phoneHeight),
       builder: (context, child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
