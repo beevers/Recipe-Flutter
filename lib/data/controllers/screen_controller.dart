@@ -10,10 +10,6 @@ class SizeManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
-      // print(constraint.maxHeight);
-      // print(constraint.maxWidth);
-      // print(constraint.minHeight);
-      // print(constraint.minWidth);
       return constraint.maxHeight < 900 && constraint.maxWidth < 450
           ? StorageHelper.getBool('active') == true
               ? const DashboardScreen()
