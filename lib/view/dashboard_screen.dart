@@ -76,7 +76,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(IconlyBold.chat),
-                label: 'Chat Bot',
+                label: 'Chat Bt',
               ),
               BottomNavigationBarItem(
                 icon: SizedBox(
