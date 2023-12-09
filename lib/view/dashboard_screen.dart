@@ -80,7 +80,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               BottomNavigationBarItem(
                 icon: SizedBox(
-                  height: 0,
+                  height: 20,
                   width: 20,
                 ),
                 label: 'Scan',
