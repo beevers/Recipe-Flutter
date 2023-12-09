@@ -72,7 +72,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(IconlyBold.home),
-                label: 'Hom',
+                label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(IconlyBold.chat),
