@@ -6,6 +6,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
+import 'package:recipe_app/view/loading/loading_indicator.dart';
 import 'package:recipe_app/view/presentation/other/recipe_detail_screen.dart';
 import 'package:recipe_app/view/presentation/other/search_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
@@ -94,7 +95,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
                                 // ref
                                 //     .read(getFoodViewModel)
-                                //     .getFood(number: 10, query: option[index]);
+                                //     .getFood(number: 20, query: option[index]);
                               },
                               index: index,
                             ),
@@ -127,34 +128,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       controller: controller,
                       children: [
                         // // Content for Tab 1
-                        GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // number of items in each row
-                            mainAxisSpacing: 12.5, // spacing between rows
-                            crossAxisSpacing: 12.5, // spacing between columns
-                            childAspectRatio:
-                                0.67, // Adjust this value to control aspect ratio
-                          ),
-                          padding: const EdgeInsets.all(
-                              8.0), // padding around the grid
-                          itemCount: foodVm
-                              .searchResults!.length, // total number of items
-                          itemBuilder: (context, index) {
-                            //TODO this is extracted Minutes
-                            // extractedMinutes = AppServices.extractMinutes(foodVm
-                            //     .searchResults![index].results![index].content
-                            //     .toString());
-                            return foodVm.searchResults![index].results!.isEmpty
-                                ? Container()
-                                : RecipeCardTemplate(
-                                    index: index,
-                                    onTap: () {
-                                      Get.to(() => const RecipeDetailScreen());
-                                    },
-                                  );
-                          },
-                        ),
+                        ref.watch(getFoodViewModel).getFoodData.loading
+                            ? const LoadingIndicator()
+                            : GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      2, // number of items in each row
+                                  mainAxisSpacing: 12.5, // spacing between rows
+                                  crossAxisSpacing:
+                                      12.5, // spacing between columns
+                                  childAspectRatio:
+                                      0.67, // Adjust this value to control aspect ratio
+                                ),
+                                padding: const EdgeInsets.all(
+                                    8.0), // padding around the grid
+                                itemCount: foodVm.searchResults!
+                                    .length, // total number of items
+                                itemBuilder: (context, index) {
+                                  //TODO this is extracted Minutes
+                                  // extractedMinutes = AppServices.extractMinutes(foodVm
+                                  //     .searchResults![index].results![index].content
+                                  //     .toString());
+                                  return foodVm.searchResults![index].results!
+                                          .isEmpty
+                                      ? const Center(child: Text("Empty"))
+                                      : RecipeCardTemplate(
+                                          index: index,
+                                          onTap: () {
+                                            Get.to(() =>
+                                                const RecipeDetailScreen());
+                                          },
+                                        );
+                                },
+                              ),
 
                         // Content for Tab 2
                         GridView.builder(

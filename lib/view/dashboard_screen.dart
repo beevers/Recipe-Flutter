@@ -19,7 +19,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(getFoodViewModel).getFood(number: 8, query: "apple");
+      ref.read(getFoodViewModel).getFood(number: 15, query: "apple");
     });
     controller = PageController(
         initialPage: ref.read(screenIndexProvider), keepPage: true);
