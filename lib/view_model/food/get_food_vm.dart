@@ -14,7 +14,7 @@ class GetFoodViewModel extends BaseViewModel {
     final result = await ref
         .read(getFoodServiceProvider)
         .getFoodService(number: number, query: query);
-    if (result.searchResults!.isNotEmpty) {
+    if (result.limit != null) {
       getFoodData.onSuccess(result);
       notifyListeners();
       return true;

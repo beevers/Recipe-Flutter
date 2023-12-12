@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/data/provider/drink_provider/get_drink_provider.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/view/loading/loading_indicator.dart';
 import 'package:recipe_app/view/presentation/other/recipe_detail_screen.dart';
@@ -15,6 +16,7 @@ import 'package:recipe_app/view/widget/card/filter_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card_template.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
+import '../../../data/helper/process_helper.dart';
 import '../../../data/provider/global_provider/global_var.dart';
 import '../../../data/provider/screen_provider.dart';
 import '../../widget/card/drink_card_template.dart';
@@ -97,9 +99,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     : ref.read(optionProvider.notifier).state =
                                         foodOption[index];
 //TODO come back here to implement function.
-                                // ref
-                                //     .read(getFoodViewModel)
-                                //     .getFood(number: 20, query: option[index]);
+                                // ref.read(getFoodViewModel).getFood(
+                                //     number: 20, query: foodOption[index]);
                               },
                               index: index,
                             ),
@@ -150,15 +151,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                 ),
                                 padding: const EdgeInsets.all(
                                     8.0), // padding around the grid
-                                itemCount: foodVm.searchResults!
+                                itemCount: foodVm.searchResults![0].results!
                                     .length, // total number of items
                                 itemBuilder: (context, index) {
-                                  //TODO this is extracted Minutes
-                                  // extractedMinutes = AppServices.extractMinutes(foodVm
-                                  //     .searchResults![index].results![index].content
-                                  //     .toString());
-                                  return foodVm.searchResults![index].results!
-                                          .isEmpty
+                                  extractedMinutes = AppServices.extractMinutes(
+                                      foodVm.searchResults![0].results![index]
+                                          .content
+                                          .toString());
+                                  return foodVm
+                                          .searchResults![0].results!.isEmpty
                                       ? const Center(child: Text("Empty"))
                                       : FoodCardTemplate(
                                           index: index,
@@ -182,7 +183,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           ),
                           padding: const EdgeInsets.all(
                               8.0), // padding around the grid
-                          itemCount: 5, // total number of items
+                          itemCount: ref
+                              .watch(getDrinkViewModel)
+                              .getDrinkData
+                              .data
+                              ?.recommendedWines
+                              ?.length, // total number of items
                           itemBuilder: (context, index) {
                             return DrinkCardTemplate(
                               index: index,

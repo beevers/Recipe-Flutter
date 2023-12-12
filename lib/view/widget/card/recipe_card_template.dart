@@ -38,11 +38,10 @@ class FoodCardTemplate extends ConsumerWidget {
             ),
             HelpSpace.h(16),
             RecipeImage(
-              image: foodVm!.searchResults![index].results![index].image!
+              image: foodVm!.searchResults![0].results![index].image!
                       .contains('wximages')
                   ? 'https://ca-times.brightspotcdn.com/dims4/default/fc493d2/2147483647/strip/false/crop/3982x2556+0+0/resize/1486x954!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F01%2F5f%2Fb0da1d324e06bbb11ea6e419a8da%2F1250986-fo-toadstool-cafe20-mam.jpg'
-                  : foodVm.searchResults![index].results![index].image
-                      .toString(),
+                  : foodVm.searchResults![0].results![index].image.toString(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -50,7 +49,7 @@ class FoodCardTemplate extends ConsumerWidget {
                 SizedBox(
                   width: 150,
                   child: Text(
-                    "${foodVm.searchResults![index].results![index].name}",
+                    "${foodVm.searchResults![0].results![index].name}",
                     maxLines: 1,
                     style: RecipeText.medium(color: const Color(0xff3d5481)),
                   ),
