@@ -7,7 +7,7 @@ class GetDrinkService extends ApiManager {
   Future<DrinksModel> getDrinkService(
       {required int number, String? query}) async {
     final response = await getHttp(
-      getDrinkUrl,
+      '$getDrinkUrl?wine=$query&number=$number',
     );
     return DrinksModel.fromJson(response.data);
   }

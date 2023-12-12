@@ -17,6 +17,7 @@ import 'package:recipe_app/view/widget/form/appform_field.dart';
 
 import '../../../data/provider/global_provider/global_var.dart';
 import '../../../data/provider/screen_provider.dart';
+import '../../widget/card/drink_card_template.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
