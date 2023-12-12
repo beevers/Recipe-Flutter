@@ -92,6 +92,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     index;
                                 ref.read(optionProvider.notifier).state =
                                     option[index];
+
+                                // ref
+                                //     .read(getFoodViewModel)
+                                //     .getFood(number: 10, query: option[index]);
                               },
                               index: index,
                             ),
@@ -114,8 +118,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     indicatorColor: green,
                     controller: controller,
                     tabs: const [
-                      Tab(text: "Left"),
-                      Tab(text: "Right"),
+                      Tab(text: "Foods"),
+                      Tab(text: "Drinks"),
                     ],
                   ),
                   HelpSpace.h(8),
@@ -138,9 +142,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           itemCount: foodVm
                               .searchResults!.length, // total number of items
                           itemBuilder: (context, index) {
-                            extractedMinutes = AppServices.extractMinutes(foodVm
-                                .searchResults![index].results![index].content
-                                .toString());
+                            //TODO this is extracted Minutes
+                            // extractedMinutes = AppServices.extractMinutes(foodVm
+                            //     .searchResults![index].results![index].content
+                            //     .toString());
                             return foodVm.searchResults![index].results!.isEmpty
                                 ? Container()
                                 : RecipeCardTemplate(
