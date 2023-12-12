@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/controllers/page_controller/page_view_controller.dart';
+import 'package:recipe_app/data/provider/drink_provider/get_drink_provider.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/data/provider/scan_provider.dart';
 import 'package:recipe_app/data/provider/screen_provider.dart';
@@ -20,6 +21,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.read(getFoodViewModel).getFood(number: 15, query: "apple");
+      ref.read(getDrinkViewModel).getDrink(number: 15, query: 'merlot');
     });
     controller = PageController(
         initialPage: ref.read(screenIndexProvider), keepPage: true);

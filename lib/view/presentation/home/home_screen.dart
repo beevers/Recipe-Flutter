@@ -182,7 +182,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           ),
                           padding: const EdgeInsets.all(
                               8.0), // padding around the grid
-                          itemCount: 1, // total number of items
+                          itemCount: 5, // total number of items
                           itemBuilder: (context, index) {
                             return DrinkCardTemplate(
                               index: index,

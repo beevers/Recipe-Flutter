@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
+import 'package:recipe_app/data/provider/global_provider/global_var.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 
 class RecipeImage extends ConsumerWidget {
@@ -20,7 +21,7 @@ class RecipeImage extends ConsumerWidget {
             borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
               image,
-              fit: BoxFit.cover,
+              fit: ref.watch(viewDrinksProvider) ? null : BoxFit.cover,
             ),
           ),
         ),

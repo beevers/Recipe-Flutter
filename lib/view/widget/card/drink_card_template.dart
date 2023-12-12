@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
-import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
 import 'package:recipe_app/data/provider/global_provider/global_var.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/card/profile_pic_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card.dart';
+
+import '../../../data/provider/drink_provider/get_drink_provider.dart';
 
 class DrinkCardTemplate extends ConsumerWidget {
   final int index;
@@ -17,6 +18,7 @@ class DrinkCardTemplate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final drinkVm = ref.watch(getDrinkViewModel).getDrinkData.data;
     return InkWell(
       onTap: onTap,
       child: SizedBox(
@@ -38,7 +40,10 @@ class DrinkCardTemplate extends ConsumerWidget {
             ),
             HelpSpace.h(16),
             RecipeImage(
-              image: ,
+              image: drinkVm!.recommendedWines![index].imageUrl!
+                      .contains('wximages')
+                  ? 'https://ca-times.brightspotcdn.com/dims4/default/fc493d2/2147483647/strip/false/crop/3982x2556+0+0/resize/1486x954!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F01%2F5f%2Fb0da1d324e06bbb11ea6e419a8da%2F1250986-fo-toadstool-cafe20-mam.jpg'
+                  : drinkVm.recommendedWines![index].imageUrl.toString(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +51,7 @@ class DrinkCardTemplate extends ConsumerWidget {
                 SizedBox(
                   width: 150,
                   child: Text(
-                    "${foodVm.searchResults![index].results![index].name}",
+                    drinkVm.recommendedWines![index].title!,
                     maxLines: 1,
                     style: RecipeText.medium(color: const Color(0xff3d5481)),
                   ),
@@ -60,12 +65,8 @@ class DrinkCardTemplate extends ConsumerWidget {
                   style: RecipeText.small(),
                 ),
                 HelpSpace.w(2),
-                Image.asset(
-                  "assets/images/onboarding/big_dot.png",
-                  scale: 1.5,
-                ),
                 Text(
-                  "price > $extractedMinutes mins",
+                  "-\$${double.parse(drinkVm.recommendedWines![index].price.toString().replaceAll(r'$', '')).toStringAsFixed(2)}",
                   style: RecipeText.small(),
                 ),
               ],
