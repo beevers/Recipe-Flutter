@@ -98,9 +98,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                         drinkOption[index]
                                     : ref.read(optionProvider.notifier).state =
                                         foodOption[index];
-//TODO come back here to implement function.
-                                // ref.read(getFoodViewModel).getFood(
-                                //     number: 20, query: foodOption[index]);
+                                // ref.watch(viewDrinksProvider)
+                                //     ? ref.read(getDrinkViewModel).getDrink(
+                                //         number: 20,
+                                //         query: drinkOption[index].toLowerCase())
+                                //     : ref.read(getFoodViewModel).getFood(
+                                //         number: 20,
+                                //         query: foodOption[index].toLowerCase());
                               },
                               index: index,
                             ),
@@ -172,30 +176,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               ),
 
                         // Content for Tab 2
-                        GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // number of items in each row
-                            mainAxisSpacing: 12.5, // spacing between rows
-                            crossAxisSpacing: 12.5, // spacing between columns
-                            childAspectRatio:
-                                0.67, // Adjust this value to control aspect ratio
-                          ),
-                          padding: const EdgeInsets.all(
-                              8.0), // padding around the grid
-                          itemCount: ref
-                              .watch(getDrinkViewModel)
-                              .getDrinkData
-                              .data
-                              ?.recommendedWines
-                              ?.length, // total number of items
-                          itemBuilder: (context, index) {
-                            return DrinkCardTemplate(
-                              index: index,
-                              onTap: null,
-                            );
-                          },
-                        ),
+                        ref.watch(getDrinkViewModel).getDrinkData.loading
+                            ? const LoadingIndicator()
+                            : GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      2, // number of items in each row
+                                  mainAxisSpacing: 12.5, // spacing between rows
+                                  crossAxisSpacing:
+                                      12.5, // spacing between columns
+                                  childAspectRatio:
+                                      0.67, // Adjust this value to control aspect ratio
+                                ),
+                                padding: const EdgeInsets.all(
+                                    8.0), // padding around the grid
+                                itemCount: ref
+                                    .watch(getDrinkViewModel)
+                                    .getDrinkData
+                                    .data
+                                    ?.recommendedWines
+                                    ?.length, // total number of items
+                                itemBuilder: (context, index) {
+                                  return DrinkCardTemplate(
+                                    index: index,
+                                    onTap: null,
+                                  );
+                                },
+                              ),
                       ],
                     ),
                   ),
