@@ -38,9 +38,12 @@ class RecipeImage extends ConsumerWidget {
                   height: 38.h,
                 ),
               ),
-              Icon(
-                IconlyLight.heart,
-                color: white,
+              InkWell(
+                onTap: () {},
+                child: Icon(
+                  IconlyLight.heart,
+                  color: 50 == 50 ? red : grey,
+                ),
               ),
             ],
           ),
