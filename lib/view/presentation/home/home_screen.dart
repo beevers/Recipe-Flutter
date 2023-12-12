@@ -90,9 +90,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               function: () {
                                 ref.read(selectedIndexProvider.notifier).state =
                                     index;
-                                ref.read(optionProvider.notifier).state =
-                                    foodOption[index];
-
+                                ref.watch(viewDrinksProvider)
+                                    ? ref.read(optionProvider.notifier).state =
+                                        drinkOption[index]
+                                    : ref.read(optionProvider.notifier).state =
+                                        foodOption[index];
+//TODO come back here to implement function.
                                 // ref
                                 //     .read(getFoodViewModel)
                                 //     .getFood(number: 20, query: option[index]);
@@ -112,7 +115,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   HelpSpace.h(5),
                   TabBar(
                     onTap: (value) {
-                      print(value);
+                      ref.read(viewDrinksProvider.notifier).state = value == 1;
                     },
                     labelColor: const Color(0xff3E5481),
                     unselectedLabelColor: grey,
@@ -156,7 +159,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                   return foodVm.searchResults![index].results!
                                           .isEmpty
                                       ? const Center(child: Text("Empty"))
-                                      : RecipeCardTemplate(
+                                      : FoodCardTemplate(
                                           index: index,
                                           onTap: () {
                                             Get.to(() =>
@@ -180,7 +183,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               8.0), // padding around the grid
                           itemCount: 1, // total number of items
                           itemBuilder: (context, index) {
-                            return RecipeCardTemplate(
+                            return DrinkCardTemplate(
                               index: index,
                               onTap: null,
                             );

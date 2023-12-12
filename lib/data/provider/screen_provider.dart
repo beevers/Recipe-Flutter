@@ -16,4 +16,4 @@ Provider<List<Widget>> get screenProvider => _screens;
 
 //Not to stay here
 List foodOption = ["All", "Food", "Drinks", "Dessert", "Snacks", "Others"];
-List drinkOption = ["All", "Alcoholic", "Non-Alcoholic", "Others"];
+List drinkOption = ["All", "Merlot", "Malbec", "Corvina", "Bonarda", "Others"];

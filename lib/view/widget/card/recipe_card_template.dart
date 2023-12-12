@@ -8,11 +8,11 @@ import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/card/profile_pic_card.dart';
 import 'package:recipe_app/view/widget/card/recipe_card.dart';
 
-class RecipeCardTemplate extends ConsumerWidget {
+class FoodCardTemplate extends ConsumerWidget {
   final int index;
   final Function()? onTap;
-  const RecipeCardTemplate(
-      {super.key, required this.onTap, required this.index});
+
+  const FoodCardTemplate({super.key, required this.onTap, required this.index});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

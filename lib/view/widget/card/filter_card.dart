@@ -5,6 +5,8 @@ import 'package:recipe_app/data/provider/screen_provider.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 
+import '../../../data/provider/global_provider/global_var.dart';
+
 class FilterCard extends ConsumerWidget {
   final int index;
   final Function()? function;
@@ -26,7 +28,9 @@ class FilterCard extends ConsumerWidget {
             borderRadius: BorderRadius.circular(35.r)),
         child: Center(
           child: Text(
-            foodOption[index],
+            ref.watch(viewDrinksProvider)
+                ? drinkOption[index]
+                : foodOption[index],
             style: RecipeText.small(color: white),
           ),
         ),
