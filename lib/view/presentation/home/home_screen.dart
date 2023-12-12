@@ -82,7 +82,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Row(
-                        children: List.generate(option.length, (index) {
+                        children: List.generate(foodOption.length, (index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: FilterCard(
@@ -91,7 +91,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                 ref.read(selectedIndexProvider.notifier).state =
                                     index;
                                 ref.read(optionProvider.notifier).state =
-                                    option[index];
+                                    foodOption[index];
 
                                 // ref
                                 //     .read(getFoodViewModel)
@@ -111,6 +111,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                   HelpSpace.h(5),
                   TabBar(
+                    onTap: (value) {
+                      print(value);
+                    },
                     labelColor: const Color(0xff3E5481),
                     unselectedLabelColor: grey,
                     indicatorWeight: 3,

@@ -26,7 +26,7 @@ class FilterCard extends ConsumerWidget {
             borderRadius: BorderRadius.circular(35.r)),
         child: Center(
           child: Text(
-            option[index],
+            foodOption[index],
             style: RecipeText.small(color: white),
           ),
         ),
