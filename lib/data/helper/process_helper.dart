@@ -15,10 +15,8 @@ class AppServices {
       // Extract the numeric value from the match
       String minutes = match.group(1)!;
 
-      print('$minutes mins');
       return minutes;
     } else {
-      print('No match found');
       return '30';
     }
   }

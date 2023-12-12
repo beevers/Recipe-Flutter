@@ -82,7 +82,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Row(
-                        children: List.generate(5, (index) {
+                        children: List.generate(option.length, (index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: FilterCard(

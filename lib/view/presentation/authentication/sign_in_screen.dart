@@ -108,6 +108,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         final response =
                             await ref.read(firebaseAuthVmProvider).signIn();
                         if (response) {
+                          semailController.text = emailController.text;
                           StorageHelper.setBool('active', true);
                           StorageHelper.getBool('isEmailVerified') == true
                               ? Get.to(() => const DashboardScreen())
@@ -138,6 +139,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           .signInWithGoogle();
                       switch (response) {
                         case true:
+                          semailController.text = emailController.text;
                           Get.to(() => const DashboardScreen());
                           break;
                         case false:
