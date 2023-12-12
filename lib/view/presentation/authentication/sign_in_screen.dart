@@ -128,10 +128,24 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 AppButton(
                     imageTitle: "assets/images/onboarding/google.png",
                     color: red,
-                    isLoading: false,
-                    function: () {
-                      ref.read(googleFirebaseAuthViewModel).signInWithGoogle();
-                      Get.to(() => const DashboardScreen());
+                    isLoading: ref
+                        .watch(googleFirebaseAuthViewModel)
+                        .googleSignInData
+                        .loading,
+                    function: () async {
+                      final response = await ref
+                          .read(googleFirebaseAuthViewModel)
+                          .signInWithGoogle();
+                      switch (response) {
+                        case true:
+                          Get.to(() => const DashboardScreen());
+                          break;
+                        case false:
+                          NotifyUser.showAlert("Something went wrong");
+                          break;
+                        default:
+                          null;
+                      }
                     },
                     isLarge: true),
                 HelpSpace.h(24),
