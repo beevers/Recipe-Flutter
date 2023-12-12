@@ -29,7 +29,12 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen>
     with SingleTickerProviderStateMixin {
-  StateProvider<int?> selectedIndexProvider = StateProvider<int?>((ref) => 0);
+  StateProvider<int> selectedIndexProvider = StateProvider<int>((ref) => 0);
+  StateProvider<int> filterIndexProvider = StateProvider<int>((ref) => 0);
+
+  StateProvider<int> drinkSelectedIndexProvider =
+      StateProvider<int>((ref) => 0);
+  StateProvider<int> foodSelectedIndexProvider = StateProvider<int>((ref) => 0);
   late final TabController controller;
   @override
   void initState() {
@@ -85,19 +90,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Row(
-                        children: List.generate(foodOption.length, (index) {
+                        children: List.generate(
+                            ref.watch(viewDrinksProvider)
+                                ? drinkOption.length
+                                : foodOption.length, (index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: FilterCard(
-                              selectedIndex: ref.watch(selectedIndexProvider),
+                              selectedIndex: ref.watch(viewDrinksProvider)
+                                  ? ref.watch(drinkSelectedIndexProvider)
+                                  : ref.watch(selectedIndexProvider),
                               function: () {
-                                ref.read(selectedIndexProvider.notifier).state =
-                                    index;
+                                ref.watch(viewDrinksProvider)
+                                    ? ref
+                                        .read(
+                                            drinkSelectedIndexProvider.notifier)
+                                        .state = index
+                                    : ref
+                                        .read(selectedIndexProvider.notifier)
+                                        .state = index;
+
+                                //
                                 ref.watch(viewDrinksProvider)
                                     ? ref.read(optionProvider.notifier).state =
                                         drinkOption[index]
                                     : ref.read(optionProvider.notifier).state =
                                         foodOption[index];
+
+                                // //
+
                                 // ref.watch(viewDrinksProvider)
                                 //     ? ref.read(getDrinkViewModel).getDrink(
                                 //         number: 20,
@@ -122,6 +143,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   TabBar(
                     onTap: (value) {
                       ref.read(viewDrinksProvider.notifier).state = value == 1;
+                      ref.watch(viewDrinksProvider)
+                          ? ref.read(optionProvider.notifier).state =
+                              drinkOption[ref.watch(drinkSelectedIndexProvider)]
+                          : ref.read(optionProvider.notifier).state =
+                              foodOption[ref.watch(selectedIndexProvider)];
                     },
                     labelColor: const Color(0xff3E5481),
                     unselectedLabelColor: grey,
