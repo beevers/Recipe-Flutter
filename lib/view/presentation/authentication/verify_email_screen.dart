@@ -7,12 +7,12 @@ import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/validation_helper.dart';
 import 'package:recipe_app/data/provider/auth_provider/firebase_auth_provider.dart';
 import 'package:recipe_app/data/utils/notify_user.dart';
+import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
 
 import '../../../data/helper/storage_helper.dart';
-import '../../dashboard_screen.dart';
 
 class VerifyEmailScreen extends ConsumerStatefulWidget {
   const VerifyEmailScreen({super.key});
@@ -65,7 +65,7 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                           await ref.read(firebaseAuthVmProvider).verifyEmail();
                       if (response) {
                         StorageHelper.setBool('isEmailVerified', true);
-                        Get.offAll(() => const DashboardScreen());
+                        Get.offAll(() => const SignInScreen());
                       } else {
                         NotifyUser.showAlert(
                             "Error Could not send verification link Try later");
