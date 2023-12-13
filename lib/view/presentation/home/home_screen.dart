@@ -185,7 +185,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.67, // Adjust this value to control aspect ratio
+                                  0.79, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
@@ -220,8 +220,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               childAspectRatio:
                                   0.67, // Adjust this value to control aspect ratio
                             ),
-                            padding: const EdgeInsets.all(
-                                8.0), // padding around the grid
+                            // padding: const EdgeInsets.all(
+                            //     8.0), // padding around the grid
                             itemCount: 4, // total number of items
                             itemBuilder: (context, index) {
                               return const LoadingIndicator();
@@ -234,7 +234,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.67, // Adjust this value to control aspect ratio
+                                  0.79, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
