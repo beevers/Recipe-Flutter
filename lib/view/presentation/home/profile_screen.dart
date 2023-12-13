@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/helper/storage_helper.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
+
+import '../authentication/sign_in_screen.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -31,6 +35,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           function: () {
             StorageHelper.setBool('active', false);
             FirebaseAuth.instance.signOut();
+            Get.offAll(() => const SignInScreen());
           },
           isLarge: false,
           title: "Firebase Sign Out",
@@ -41,6 +46,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           function: () {
             StorageHelper.setBool('active', false);
             GoogleSignIn().signOut();
+
+            Get.offAll(() => const SignInScreen());
           },
           isLarge: false,
           title: "Google Sign Out",

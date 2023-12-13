@@ -11,7 +11,6 @@ import 'package:recipe_app/view/presentation/authentication/sign_in_screen.dart'
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:recipe_app/view/widget/form/appform_field.dart';
-
 import '../../../data/helper/storage_helper.dart';
 
 class VerifyEmailScreen extends ConsumerStatefulWidget {
