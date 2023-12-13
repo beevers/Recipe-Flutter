@@ -197,7 +197,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                       .searchResults![0].results![index].content
                                       .toString());
                               return foodVm.searchResults![0].results!.isEmpty
-                                  ? const Center(child: Text("Empt"))
+                                  ? const Center(child: Text("Empty"))
                                   : FoodCardTemplate(
                                       index: index,
                                       onTap: () {
