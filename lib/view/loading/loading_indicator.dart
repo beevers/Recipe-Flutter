@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shimmer/shimmer.dart';
 
 import '../../data/helper/space_helper.dart';
 import '../theme/app_color.dart';
 import '../widget/card/profile_pic_card.dart';
-import '../widget/card/recipe_card.dart';
 
 class LoadingIndicator extends ConsumerWidget {
   const LoadingIndicator({super.key});
@@ -28,8 +28,11 @@ class LoadingIndicator extends ConsumerWidget {
                 Container(width: 100, height: 10, color: red),
               ],
             ),
-            RecipeImage(
-              image: image,
+            HelpSpace.h(10),
+            Container(
+              color: red,
+              width: 140.w,
+              height: 140.h,
             ),
             HelpSpace.h(16),
             Row(
