@@ -41,8 +41,8 @@ class LoadingIndicator extends ConsumerWidget {
                 SizedBox(
                   width: 150,
                   child: Container(
-                    height: 20,
-                    width: 100,
+                    height: 20.h,
+                    width: 100.w,
                     color: red,
                   ),
                 ),
@@ -52,8 +52,8 @@ class LoadingIndicator extends ConsumerWidget {
             Row(
               children: [
                 Container(
-                  width: 180,
-                  height: 10,
+                  width: 140.w,
+                  height: 10.h,
                   color: red,
                 ),
               ],

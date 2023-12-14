@@ -160,15 +160,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   controller: controller,
                   children: [
                     // // Content for Tab 1
-                    50 == 50
+                    ref.watch(getFoodViewModel).getFoodData.loading ||
+                            foodVm == null
                         ? GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2, // number of items in each row
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.5, // Adjust this value to control aspect ratio
+                                  0.6, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
@@ -188,7 +190,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
-                            itemCount: foodVm!.searchResults?[0].results!
+                            itemCount: foodVm.searchResults?[0].results!
                                 .length, // total number of items
                             itemBuilder: (context, index) {
                               extractedMinutes = AppServices.extractMinutes(
@@ -211,6 +213,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ref.watch(getDrinkViewModel).getDrinkData.loading ||
                             drinkVm == null
                         ? GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2, // number of items in each row
