@@ -9,3 +9,4 @@ Color white = const Color(0xffFFFFFF);
 Color transparent = Colors.transparent;
 Color blur = const Color(0x33FFFFFF);
 Color dBlue = const Color(0xff3d5481);
+Color black = const Color(0xff000000);

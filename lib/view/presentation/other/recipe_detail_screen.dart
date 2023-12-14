@@ -25,23 +25,24 @@ class _RecipeDetailScreenState extends ConsumerState<RecipeDetailScreen> {
       body: SafeArea(
           child: Column(
         children: [
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Stack(
-                children: [
-                  Container(
-                      color: red,
-                      width: double.infinity,
-                      height: 375.h,
-                      child: Image.network(
-                        "https://spoonacular.com/recipeImages/632573-312x231.jpg",
-                        fit: BoxFit.cover,
-                      )),
-                  Align(
-                    alignment: const Alignment(-0.89, -0.9),
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Stack(
+              children: [
+                Container(
+                    color: red,
+                    width: double.infinity,
+                    height: 300.h,
+                    child: Image.network(
+                      "https://spoonacular.com/recipeImages/632573-312x231.jpg",
+                      fit: BoxFit.cover,
+                    )),
+                SizedBox(
+                  height: 100,
+                  child: Align(
+                    alignment: const Alignment(-0.89, 0.4),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -61,20 +62,23 @@ class _RecipeDetailScreenState extends ConsumerState<RecipeDetailScreen> {
                         )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
           Html(
             onLinkTap: (url, context, element) {
-              Get.to(() => const RecipeWebView());
+              Get.to(() => RecipeWebView(
+                    url: url ?? 'https://www.google.com.ng/',
+                  ));
               // Handle link tap here
               // You can open the link in a browser or perform any other action
             },
             data:
                 'The recipe Apple Pie Bars could satisfy your American craving in roughly <b>1 hour and 15 minutes</b>. Watching your figure? This dairy free recipe has <b>134 calories</b>, <b>2g of protein</b>, and <b>3g of fat</b> per serving. For <b>28 cents per serving</b>, you get a dessert that serves 24. 78 people have tried and liked this recipe. A mixture of mcintosh apples, flour, vegetable oil, and a handful of other ingredients are all it takes to make this recipe so flavorful. It is brought to you by Foodista. With a spoonacular <b>score of 21%</b>, this dish is not so super. If you like this recipe, you might also like recipes such as <a href="https://spoonacular.com/recipes/apple-pie-bars-610491">Apple Pie Bars</a>, <a href="https://spoonacular.com/recipes/apple-pie-bars-543608">Apple Pie Bars</a>, and <a href="https://spoonacular.com/recipes/apple-pie-bars-616727">Apple Pie Bars</a>.',
           ),
+          const Spacer(),
           AppButton(
             isLoading: false,
             function: () {
