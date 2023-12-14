@@ -8,8 +8,8 @@ import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
-import 'package:recipe_app/view/widget/card/modal_sheet_content.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:recipe_app/view/widget/card/modal_sheet_content.dart';
 
 class RecipeDetailScreen extends ConsumerStatefulWidget {
   const RecipeDetailScreen({super.key});
@@ -66,12 +66,14 @@ class _RecipeDetailScreenState extends ConsumerState<RecipeDetailScreen> {
               ),
             ),
           ),
-          Text(
-            'Hello ',
-            style: RecipeText.small(),
-          ),
-          //TODO flutter html is causing problem
           Html(
+            onLinkTap: (url, context, element) {
+              // Handle link tap here
+              print('Link tapped: $url');
+              print('Link tapped: $context');
+              print('Link tapped: $element');
+              // You can open the link in a browser or perform any other action
+            },
             data:
                 'The recipe Apple Pie Bars could satisfy your American craving in roughly <b>1 hour and 15 minutes</b>. Watching your figure? This dairy free recipe has <b>134 calories</b>, <b>2g of protein</b>, and <b>3g of fat</b> per serving. For <b>28 cents per serving</b>, you get a dessert that serves 24. 78 people have tried and liked this recipe. A mixture of mcintosh apples, flour, vegetable oil, and a handful of other ingredients are all it takes to make this recipe so flavorful. It is brought to you by Foodista. With a spoonacular <b>score of 21%</b>, this dish is not so super. If you like this recipe, you might also like recipes such as <a href="https://spoonacular.com/recipes/apple-pie-bars-610491">Apple Pie Bars</a>, <a href="https://spoonacular.com/recipes/apple-pie-bars-543608">Apple Pie Bars</a>, and <a href="https://spoonacular.com/recipes/apple-pie-bars-616727">Apple Pie Bars</a>.',
           ),
