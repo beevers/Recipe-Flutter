@@ -5,8 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
+import 'package:recipe_app/view/presentation/web_view/recipe_web_view.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
-import 'package:recipe_app/view/theme/text_style.dart';
 import 'package:recipe_app/view/widget/button/app_button.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:recipe_app/view/widget/card/modal_sheet_content.dart';
@@ -68,10 +68,8 @@ class _RecipeDetailScreenState extends ConsumerState<RecipeDetailScreen> {
           ),
           Html(
             onLinkTap: (url, context, element) {
+              Get.to(() => const RecipeWebView());
               // Handle link tap here
-              print('Link tapped: $url');
-              print('Link tapped: $context');
-              print('Link tapped: $element');
               // You can open the link in a browser or perform any other action
             },
             data:

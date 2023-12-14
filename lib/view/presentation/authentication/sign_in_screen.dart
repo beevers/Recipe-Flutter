@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -110,7 +111,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         if (response) {
                           semailController.text = emailController.text;
                           StorageHelper.setBool('active', true);
-                          StorageHelper.getBool('isEmailVerified') == true
+                          FirebaseAuth.instance.currentUser!.emailVerified
                               ? Get.to(() => const DashboardScreen())
                               : Get.to(() => const VerifyEmailScreen());
                         }
@@ -137,16 +138,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       final response = await ref
                           .read(googleFirebaseAuthViewModel)
                           .signInWithGoogle();
-                      switch (response) {
-                        case true:
-                          semailController.text = emailController.text;
-                          Get.to(() => const DashboardScreen());
-                          break;
-                        case false:
-                          NotifyUser.showAlert("Something went wrong");
-                          break;
-                        default:
-                          null;
+                      if (response) {
+                        Get.to(() => const DashboardScreen());
+                      } else {
+                        NotifyUser.showAlert("Something went wrong");
                       }
                     },
                     isLarge: true),

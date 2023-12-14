@@ -7,7 +7,7 @@ import 'package:iconly/iconly.dart';
 import 'package:recipe_app/data/helper/space_helper.dart';
 import 'package:recipe_app/data/provider/drink_provider/get_drink_provider.dart';
 import 'package:recipe_app/data/provider/food_provider/get_food_provider.dart';
-import 'package:recipe_app/view/loading/loading_indicator.dart';
+import 'package:recipe_app/view/presentation/loading/loading_indicator.dart';
 import 'package:recipe_app/view/presentation/other/recipe_detail_screen.dart';
 import 'package:recipe_app/view/presentation/other/search_screen.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
@@ -160,8 +160,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   controller: controller,
                   children: [
                     // // Content for Tab 1
-                    ref.watch(getFoodViewModel).getFoodData.loading ||
-                            foodVm == null
+                    50 == 50
                         ? GridView.builder(
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
@@ -169,7 +168,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.67, // Adjust this value to control aspect ratio
+                                  0.5, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
@@ -185,11 +184,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.79, // Adjust this value to control aspect ratio
+                                  0.70, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid
-                            itemCount: foodVm.searchResults?[0].results!
+                            itemCount: foodVm!.searchResults?[0].results!
                                 .length, // total number of items
                             itemBuilder: (context, index) {
                               extractedMinutes = AppServices.extractMinutes(
@@ -218,7 +217,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.67, // Adjust this value to control aspect ratio
+                                  0.70, // Adjust this value to control aspect ratio
                             ),
                             // padding: const EdgeInsets.all(
                             //     8.0), // padding around the grid
@@ -234,7 +233,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               mainAxisSpacing: 12.5, // spacing between rows
                               crossAxisSpacing: 12.5, // spacing between columns
                               childAspectRatio:
-                                  0.79, // Adjust this value to control aspect ratio
+                                  0.70, // Adjust this value to control aspect ratio
                             ),
                             padding: const EdgeInsets.all(
                                 8.0), // padding around the grid

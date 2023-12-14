@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shimmer/shimmer.dart';
 
-import '../../data/helper/space_helper.dart';
-import '../theme/app_color.dart';
-import '../widget/card/profile_pic_card.dart';
+import '../../../data/helper/space_helper.dart';
+import '../../theme/app_color.dart';
+import '../../widget/card/profile_pic_card.dart';
 
 class LoadingIndicator extends ConsumerWidget {
   const LoadingIndicator({super.key});
@@ -52,7 +52,7 @@ class LoadingIndicator extends ConsumerWidget {
             Row(
               children: [
                 Container(
-                  width: 200,
+                  width: 180,
                   height: 10,
                   color: red,
                 ),
