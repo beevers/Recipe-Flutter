@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:recipe_app/data/controllers/web_view_controller/recipe_web_view_cont.dart';
 import 'package:recipe_app/view/theme/app_color.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -52,7 +53,22 @@ class _RecipeWebViewState extends ConsumerState<RecipeWebView> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Flutter Simple Example')),
+        appBar: AppBar(
+          backgroundColor: black,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: white,
+            ),
+          ),
+          title: Text(
+            "Recipe",
+            style: TextStyle(color: white),
+          ),
+        ),
         body: Stack(children: [
           Center(
             child: CupertinoActivityIndicator(

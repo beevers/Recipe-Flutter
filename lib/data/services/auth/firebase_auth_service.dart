@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/controllers/form_controller/text_form_cont.dart';
 import 'package:recipe_app/data/helper/storage_helper.dart';
+import 'package:recipe_app/model/abstracts/firebase_auth_abstract.dart';
 
-class FirebaseAuthService {
+class FirebaseAuthService implements FirebaseAbstract {
+  @override
   Future<String> signIn() async {
     try {
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -17,6 +19,7 @@ class FirebaseAuthService {
     }
   }
 
+  @override
   Future<String> signUp() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -29,6 +32,7 @@ class FirebaseAuthService {
     }
   }
 
+  @override
   Future<bool> verifyEmail() async {
     try {
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
@@ -39,6 +43,7 @@ class FirebaseAuthService {
     }
   }
 
+  @override
   Future<bool> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
