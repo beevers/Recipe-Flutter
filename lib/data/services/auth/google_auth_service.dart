@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../model/abstracts/google_auth_abstract.dart';
+
 // ViewModel class responsible for handling Google Authentication
-class GoogleFirebaseAuthService {
+class GoogleFirebaseAuthService implements GoogleAuthAbstract {
   final _loadingProvider = StateProvider<bool>((ref) => false);
 
   StateProvider<bool> get loadingProvider => _loadingProvider;
 
   // Method to initiate Google Sign-In and authenticate the user
+  @override
   Future<UserCredential?> signInWithGoogle(ref) async {
     try {
       // Set loading state to true to indicate that the authentication process is ongoing
